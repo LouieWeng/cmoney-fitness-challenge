@@ -5,7 +5,7 @@ export const SIGNUP_FORM_URL = 'https://forms.gle/example';
 export const GOOGLE_DRIVE_URL = 'https://drive.google.com/drive/folders/example';
 
 export const TEAMS_DATA: Team[] = [
-  { id: 1, members: ['Alice', 'Bob'], points: 42 },
+  { id: 1, members: ['Randall', 'Louie'], points: 42 },
   { id: 2, members: ['Charlie', 'Diana'], points: 38 },
   { id: 3, members: ['Ethan', 'Fiona'], points: 35 },
   { id: 4, members: ['George', 'Hannah'], points: 31 },
