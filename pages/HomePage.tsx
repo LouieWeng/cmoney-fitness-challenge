@@ -36,9 +36,30 @@ const RuleStep: React.FC<{ number: number; title: string; description: string }>
     );
 };
 
+const PrizeCard: React.FC<{ title: string; prizes: { place: string; reward: string; color: string; icon: string; }[] }> = ({ title, prizes }) => (
+    <div className="bg-slate-800 p-8 rounded-lg shadow-lg flex flex-col h-full">
+        <h3 className="text-2xl font-bold text-center text-white mb-6">{title}</h3>
+        <ul className="space-y-4 flex-grow">
+            {prizes.map((prize, index) => (
+                <li key={index} className="flex justify-between items-center text-lg">
+                    <span>{prize.icon} {prize.place}</span>
+                    <span className={`font-bold ${prize.color}`}>{prize.reward}</span>
+                </li>
+            ))}
+        </ul>
+    </div>
+);
+
 const HomePage: React.FC = () => {
   const navigate = useNavigate();
   const gradientText = "bg-gradient-to-r from-[#92FFFE] to-[#C4FF77] text-transparent bg-clip-text";
+
+  const menPrizes = [
+    { place: '1st Place', reward: '4,000 NTD', color: 'text-[#C4FF77]', icon: '🥇' },
+    { place: '2nd Place', reward: '2,500 NTD', color: 'text-slate-300', icon: '🥈' },
+    { place: '3rd Place', reward: '1,000 NTD', color: 'text-yellow-600', icon: '🥉' },
+  ];
+  const womenPrizes = [...menPrizes];
 
   return (
     <div className="space-y-24">
@@ -109,6 +130,18 @@ const HomePage: React.FC = () => {
                   View Full Rules
               </button>
           </div>
+      </section>
+
+      {/* Prize Section */}
+      <section>
+          <h2 className="text-3xl font-bold text-center text-white mb-12">Claim Your <span className={gradientText}>Victory Prizes</span></h2>
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+              <PrizeCard title="Men's Division" prizes={menPrizes} />
+              <PrizeCard title="Women's Division" prizes={womenPrizes} />
+          </div>
+          <p className="text-center text-slate-400 mt-8 max-w-2xl mx-auto">
+              Prizes are awarded to the top 3 individuals in each division with the biggest body composition transformation.
+          </p>
       </section>
 
     </div>
