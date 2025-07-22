@@ -14,6 +14,7 @@ const getTrophyIcon = (rank: number) => {
 
 const RankingPage: React.FC = () => {
   const sortedTeams: Team[] = [...TEAMS_DATA].sort((a, b) => b.points - a.points);
+  const gradientText = "bg-gradient-to-r from-[#92FFFE] to-[#C4FF77] text-transparent bg-clip-text";
 
   return (
     <div className="space-y-12">
