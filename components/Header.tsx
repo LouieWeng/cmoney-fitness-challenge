@@ -23,13 +23,13 @@ const Header: React.FC = () => {
               to="/rules"
               className={({ isActive }) => (isActive ? activeLinkClass : inactiveLinkClass)}
             >
-              Rules
+              完整規則
             </NavLink>
             <NavLink
               to="/ranking"
               className={({ isActive }) => (isActive ? activeLinkClass : inactiveLinkClass)}
             >
-              Rankings
+              每週賽況
             </NavLink>
           </nav>
           {/* Mobile Menu Button */}
