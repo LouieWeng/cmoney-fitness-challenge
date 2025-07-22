@@ -55,9 +55,9 @@ const HomePage: React.FC = () => {
   const gradientText = "bg-gradient-to-r from-[#92FFFE] to-[#C4FF77] text-transparent bg-clip-text";
 
   const menPrizes = [
-    { place: '1st Place', reward: '4,000 NTD', color: 'text-[#C4FF77]', icon: '🥇' },
-    { place: '2nd Place', reward: '2,500 NTD', color: 'text-slate-300', icon: '🥈' },
-    { place: '3rd Place', reward: '1,000 NTD', color: 'text-yellow-600', icon: '🥉' },
+    { place: '第一名', reward: '$4,000禮券', color: 'text-[#C4FF77]', icon: '🥇' },
+    { place: '第二名', reward: '$2,000禮券', color: 'text-slate-300', icon: '🥈' },
+    { place: '第三名', reward: '$1,000禮券', color: 'text-yellow-600', icon: '🥉' },
   ];
   const womenPrizes = [...menPrizes];
 
@@ -67,17 +67,17 @@ const HomePage: React.FC = () => {
       <section className="grid md:grid-cols-2 gap-8 md:gap-16 items-center pt-12">
         <div className="text-center md:text-left">
           <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-white">
-            Transform <span className={gradientText}>Together</span>.
+            增肌減脂挑戰賽 <span className={gradientText}>正式開戰</span>.
           </h1>
           <p className="mt-4 max-w-2xl mx-auto md:mx-0 text-lg md:text-xl text-slate-300">
-            Grab a partner, crush your fitness goals, and win big! Two months of sweat, strength, and success await in the CMoney Fitness Challenge.
+            2人一組，進行2個月的增肌減脂對決，和你的隊友互相督促，一起為健康與獎金而戰！
           </p>
           <div className="mt-8 flex justify-center md:justify-start gap-4">
             <a href={SIGNUP_FORM_URL} target="_blank" rel="noopener noreferrer" className="inline-block bg-gradient-to-r from-[#92FFFE] to-[#C4FF77] text-slate-900 font-bold py-3 px-8 rounded-lg hover:brightness-110 transition-all">
-              Join The Challenge
+              立即報名
             </a>
             <button onClick={() => navigate('/ranking')} className="inline-block bg-slate-700 text-white font-bold py-3 px-8 rounded-lg hover:bg-slate-600 transition-colors">
-              View Rankings
+              每週賽況
             </button>
           </div>
         </div>
@@ -92,27 +92,27 @@ const HomePage: React.FC = () => {
 
       {/* Benefits Section */}
       <section>
-        <h2 className="text-3xl font-bold text-center text-white mb-12">Why You Should Join</h2>
+        <h2 className="text-3xl font-bold text-center text-white mb-12">為什麼要參加</h2>
         <div className="grid md:grid-cols-3 gap-8">
-          <FeatureCard title="Boost Your Health" icon={<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>}>
-            Feel more energetic, improve your physical well-being, and build sustainable healthy habits that last a lifetime.
+          <FeatureCard title="活得更健康" icon={<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>}>
+            你有規律的運動習慣，並且確實飲控嗎？加入這個挑戰，兩個月後的你絕對會比現在更健康！
           </FeatureCard>
-          <FeatureCard title="Build Team Spirit" icon={<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.653-.124-1.282-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.653.124-1.282.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>}>
-            Collaborate with a colleague, motivate each other, and strengthen your professional and personal bonds.
+          <FeatureCard title="提升團隊凝聚" icon={<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.653-.124-1.282-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.653.124-1.282.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>}>
+            和你的神隊友一起互相激勵、互相凱瑞，有共同目標會讓你們交情更好！
           </FeatureCard>
-          <FeatureCard title="Win Awesome Prizes" icon={<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 11l3-3m0 0l3 3m-3-3v8m0-13a9 9 0 110 18 9 9 0 010-18z" /></svg>}>
-            Compete for the grand prize, bragging rights, and the title of CMoney Fitness Champion!
+          <FeatureCard title="抱走豐厚獎金" icon={<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 11l3-3m0 0l3 3m-3-3v8m0-13a9 9 0 110 18 9 9 0 010-18z" /></svg>}>
+            成為前三名，不僅可以拿到豐厚獎品，以後說到增肌減脂大家就會想到你！
           </FeatureCard>
         </div>
       </section>
 
       {/* Timeline Section */}
       <section>
-          <h2 className="text-3xl font-bold text-center text-white mb-12">Contest Timeline</h2>
+          <h2 className="text-3xl font-bold text-center text-white mb-12">挑戰時程</h2>
           <div className="max-w-3xl mx-auto">
-              <TimelineStep date="Week 1" title="Kick-off & Initial Measurement" description="Let the games begin! Get your starting body composition stats recorded." />
-              <TimelineStep date="Week 4" title="Mid-point Check-in" description="A midway checkpoint to see your progress and recalibrate your strategy." />
-              <TimelineStep date="Week 8" title="Final Measurement & Victory" description="The final weigh-in. We'll crown the champions based on points and transformation!" />
+              <TimelineStep date="Week 1" title="挑戰開始｜首週測量" description="挑戰第一天將測量所有成員的體脂率及骨骼肌率，作為起始分數" />
+              <TimelineStep date="Week 4" title="期中測量" description="為了讓比賽更有趣，期中也會測量一次" />
+              <TimelineStep date="Week 8" title="最終測量｜分數結算" description="這兩個月的增肌減脂分數與運動打卡分數加總，將揭曉最終的冠軍！" />
           </div>
       </section>
 
@@ -120,27 +120,27 @@ const HomePage: React.FC = () => {
       <section>
           <h2 className="text-3xl font-bold text-center text-white mb-12">How to Compete</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
-              <RuleStep number={1} title="Team Up" description="Form a dynamic duo and register your team." />
-              <RuleStep number={2} title="Earn Points" description="Exercise 3x a week to earn team points." />
-              <RuleStep number={3} title="Log Workouts" description="Upload photo proof to Google Drive." />
-              <RuleStep number={4} title="Get Measured" description="Attend three check-ins to track transformation." />
+              <RuleStep number={1} title="找到你的神隊友" description="兩人須同性別;其中一人代表填寫表單。" />
+              <RuleStep number={2} title="每週運動打卡" description="每人每週運動3次，每次30分鐘，上傳認證照後可為團隊+1分" />
+              <RuleStep number={3} title="驚喜小任務" description="活動過程可能會有驚喜小任務，或許是與其他隊伍拉開差距的好機會" />
+              <RuleStep number={4} title="測量身體數值" description="參與期初、期中、期末測量，計算肌肉與體脂變化" />
           </div>
           <div className="text-center mt-12">
               <button onClick={() => navigate('/rules')} className="inline-block bg-slate-700 text-white font-bold py-3 px-8 rounded-lg hover:bg-slate-600 transition-colors">
-                  View Full Rules
+                  看完整規則
               </button>
           </div>
       </section>
 
       {/* Prize Section */}
       <section>
-          <h2 className="text-3xl font-bold text-center text-white mb-12">Claim Your <span className={gradientText}>Victory Prizes</span></h2>
+          <h2 className="text-3xl font-bold text-center text-white mb-12">你準備好拿走 <span className={gradientText}>豐厚獎金了嗎</span></h2>
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-              <PrizeCard title="Men's Division" prizes={menPrizes} />
-              <PrizeCard title="Women's Division" prizes={womenPrizes} />
+              <PrizeCard title="男生組" prizes={menPrizes} />
+              <PrizeCard title="女生組" prizes={womenPrizes} />
           </div>
           <p className="text-center text-slate-400 mt-8 max-w-2xl mx-auto">
-              Prizes are awarded to the top 3 individuals in each division with the biggest body composition transformation.
+              平分將優先比較增肌減脂分數，其次為運動打卡分數。
           </p>
       </section>
 
