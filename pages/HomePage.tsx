@@ -67,7 +67,7 @@ const HomePage: React.FC = () => {
       <section className="grid md:grid-cols-2 gap-8 md:gap-16 items-center pt-12">
         <div className="text-center md:text-left">
           <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-white">
-            增肌減脂挑戰賽 <span className={gradientText}>正式開戰</span>
+            <span className={gradientText}>增肌減脂挑戰賽</span>正式開戰
           </h1>
           <p className="mt-4 max-w-2xl mx-auto md:mx-0 text-lg md:text-xl text-slate-300">
             2人一組，進行2個月的增肌減脂對決。和你的隊友互相督促，一起為健康與獎金而戰！
