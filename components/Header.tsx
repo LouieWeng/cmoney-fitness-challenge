@@ -14,7 +14,7 @@ const Header: React.FC = () => {
         <div className="flex items-center justify-between h-20">
           <div className="flex-shrink-0">
             <NavLink to="/" className="text-2xl font-bold text-white tracking-tight">
-              CMoney <span className={gradientText}>FitChallenge</span>
+              CMoney <span className={gradientText}>增肌減脂挑戰賽</span>
             </NavLink>
           </div>
           {/* Desktop Nav */}
@@ -62,14 +62,14 @@ const Header: React.FC = () => {
             onClick={() => setIsMenuOpen(false)}
             className={({ isActive }) => `${mobileLinkClass} text-center ${isActive ? activeLinkClass : inactiveLinkClass}`}
           >
-            Rules
+            完整規則
           </NavLink>
           <NavLink
             to="/ranking"
             onClick={() => setIsMenuOpen(false)}
             className={({ isActive }) => `${mobileLinkClass} text-center ${isActive ? activeLinkClass : inactiveLinkClass}`}
           >
-            Rankings
+            每週賽況
           </NavLink>
         </div>
       </div>

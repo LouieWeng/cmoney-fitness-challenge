@@ -67,10 +67,10 @@ const HomePage: React.FC = () => {
       <section className="grid md:grid-cols-2 gap-8 md:gap-16 items-center pt-12">
         <div className="text-center md:text-left">
           <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-white">
-            增肌減脂挑戰賽 <span className={gradientText}>正式開戰</span>.
+            增肌減脂挑戰賽 <span className={gradientText}>正式開戰</span>
           </h1>
           <p className="mt-4 max-w-2xl mx-auto md:mx-0 text-lg md:text-xl text-slate-300">
-            2人一組，進行2個月的增肌減脂對決，和你的隊友互相督促，一起為健康與獎金而戰！
+            2人一組，進行2個月的增肌減脂對決。和你的隊友互相督促，一起為健康與獎金而戰！
           </p>
           <div className="mt-8 flex justify-center md:justify-start gap-4">
             <a href={SIGNUP_FORM_URL} target="_blank" rel="noopener noreferrer" className="inline-block bg-gradient-to-r from-[#92FFFE] to-[#C4FF77] text-slate-900 font-bold py-3 px-8 rounded-lg hover:brightness-110 transition-all">
@@ -92,16 +92,16 @@ const HomePage: React.FC = () => {
 
       {/* Benefits Section */}
       <section>
-        <h2 className="text-3xl font-bold text-center text-white mb-12">為什麼要參加</h2>
+        <h2 className="text-3xl font-bold text-center text-white mb-12">為什麼要參加？</h2>
         <div className="grid md:grid-cols-3 gap-8">
           <FeatureCard title="活得更健康" icon={<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>}>
-            你有規律的運動習慣，並且確實飲控嗎？加入這個挑戰，兩個月後的你絕對會比現在更健康！
+            想要成為有規律運動習慣，又能確實飲控的人嗎？加入這個挑戰，兩個月後的你絕對會比現在更健康！
           </FeatureCard>
           <FeatureCard title="提升團隊凝聚" icon={<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.653-.124-1.282-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.653.124-1.282.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>}>
-            和你的神隊友一起互相激勵、互相凱瑞，有共同目標會讓你們交情更好！
+            和你的神隊友一起互相激勵、互相凱瑞，有共同目標會讓你們更麻吉！
           </FeatureCard>
           <FeatureCard title="抱走豐厚獎金" icon={<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 11l3-3m0 0l3 3m-3-3v8m0-13a9 9 0 110 18 9 9 0 010-18z" /></svg>}>
-            成為前三名，不僅可以拿到豐厚獎品，以後說到增肌減脂大家就會想到你！
+            成為前三名，不僅可以拿到豐厚獎品，還能獲得增肌減脂王的封號！以後說到增肌減脂大家就會想到你！
           </FeatureCard>
         </div>
       </section>
@@ -118,7 +118,7 @@ const HomePage: React.FC = () => {
 
       {/* How to Compete Section */}
       <section>
-          <h2 className="text-3xl font-bold text-center text-white mb-12">How to Compete</h2>
+          <h2 className="text-3xl font-bold text-center text-white mb-12">參加的話，我需要做什麼？</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
               <RuleStep number={1} title="找到你的神隊友" description="兩人須同性別;其中一人代表填寫表單。" />
               <RuleStep number={2} title="每週運動打卡" description="每人每週運動3次，每次30分鐘，上傳認證照後可為團隊+1分" />
@@ -134,13 +134,13 @@ const HomePage: React.FC = () => {
 
       {/* Prize Section */}
       <section>
-          <h2 className="text-3xl font-bold text-center text-white mb-12">你準備好拿走 <span className={gradientText}>豐厚獎金了嗎</span></h2>
+          <h2 className="text-3xl font-bold text-center text-white mb-12">你準備好拿走 <span className={gradientText}>豐厚獎金了嗎？</span></h2>
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
               <PrizeCard title="男生組" prizes={menPrizes} />
               <PrizeCard title="女生組" prizes={womenPrizes} />
           </div>
           <p className="text-center text-slate-400 mt-8 max-w-2xl mx-auto">
-              平分將優先比較增肌減脂分數，其次為運動打卡分數。
+              平分將優先比較增肌減脂分數，其次為運動打卡分數。詳見完整規則。
           </p>
       </section>
 
