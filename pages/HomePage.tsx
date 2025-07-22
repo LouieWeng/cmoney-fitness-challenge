@@ -73,7 +73,7 @@ const HomePage: React.FC = () => {
             2人一組，進行2個月的增肌減脂對決。和你的隊友互相督促，一起為健康與獎金而戰！
           </p>
           <div className="mt-8 flex justify-center md:justify-start gap-4">
-            <a href={SIGNUP_FORM_URL} target="_blank" rel="noopener noreferrer" className="inline-block bg-gradient-to-r from-[#92FFFE] to-[#C4FF77] text-slate-900 font-bold py-3 px-8 rounded-lg hover:brightness-110 transition-all">
+            <a href={"https://forms.gle/RjWVDVjESkKVapJf6"} target="_blank" rel="noopener noreferrer" className="inline-block bg-gradient-to-r from-[#92FFFE] to-[#C4FF77] text-slate-900 font-bold py-3 px-8 rounded-lg hover:brightness-110 transition-all">
               立即報名
             </a>
             <button onClick={() => navigate('/ranking')} className="inline-block bg-slate-700 text-white font-bold py-3 px-8 rounded-lg hover:bg-slate-600 transition-colors">
