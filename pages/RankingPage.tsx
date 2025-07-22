@@ -20,7 +20,7 @@ const RankingPage: React.FC = () => {
     <div className="space-y-12">
       <section className="text-center">
         <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white">
-          <span className={gradientText}>增肌減脂挑戰賽</span>正式開戰
+          快來關注<span className={gradientText}>每週賽況</span>
         </h1>
         <p className="mt-3 max-w-2xl mx-auto text-lg text-slate-300">
           每週一將結算前一週的運動打卡分數，並且更新到賽況。
