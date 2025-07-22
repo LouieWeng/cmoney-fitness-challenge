@@ -67,10 +67,10 @@ const RankingPage: React.FC = () => {
                 <p className="text-slate-300 mt-1">找到你的神隊友後，就趕快填表單報名吧！男女生各限15組</p>
             </div>
             <div className="flex flex-col sm:flex-row gap-4 flex-shrink-0">
-                <a href={SIGNUP_FORM_URL} target="_blank" rel="noopener noreferrer" className="inline-block bg-emerald-500 text-white font-bold py-3 px-6 rounded-lg hover:bg-emerald-600 transition-colors text-center">
+                <a href={"https://forms.gle/RjWVDVjESkKVapJf6"} target="_blank" rel="noopener noreferrer" className="inline-block bg-emerald-500 text-white font-bold py-3 px-6 rounded-lg hover:bg-emerald-600 transition-colors text-center">
                     立即報名
                 </a>
-                <a href={GOOGLE_DRIVE_URL} target="_blank" rel="noopener noreferrer" className="inline-block bg-sky-500 text-white font-bold py-3 px-6 rounded-lg hover:bg-sky-600 transition-colors text-center">
+                <a href={"https://drive.google.com/drive/u/0/folders/1d-JmO9mOgzwFn-2AMeuIUuh-IM_5qSrv"} target="_blank" rel="noopener noreferrer" className="inline-block bg-sky-500 text-white font-bold py-3 px-6 rounded-lg hover:bg-sky-600 transition-colors text-center">
                     上傳認證照
                 </a>
             </div>
