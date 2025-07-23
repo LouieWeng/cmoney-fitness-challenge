@@ -97,7 +97,7 @@ const HomePage: React.FC = () => {
           <FeatureCard title="活得更健康" icon={<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>}>
             想要成為有規律運動習慣，又能確實飲控的人嗎？加入這個挑戰，兩個月後的你絕對會比現在更健康！
           </FeatureCard>
-          <FeatureCard title="提升團隊凝聚" icon={<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.653-.124-1.282-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.653.124-1.282.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>}>
+          <FeatureCard title="提升團隊凝聚力" icon={<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.653-.124-1.282-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.653.124-1.282.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>}>
             和你的神隊友一起互相激勵、互相凱瑞，有共同目標會讓你們更麻吉！
           </FeatureCard>
           <FeatureCard title="抱走豐厚獎金" icon={<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 11l3-3m0 0l3 3m-3-3v8m0-13a9 9 0 110 18 9 9 0 010-18z" /></svg>}>
@@ -110,9 +110,10 @@ const HomePage: React.FC = () => {
       <section>
           <h2 className="text-3xl font-bold text-center text-white mb-12">挑戰時程</h2>
           <div className="max-w-3xl mx-auto">
-              <TimelineStep date="Week 1" title="挑戰開始｜首週測量" description="挑戰第一天將測量所有成員的體脂率及骨骼肌率，作為起始分數" />
+              <TimelineStep date="Register" title="7/28-7/30 報名" description="以Google表單填寫報名資訊，報名後會邀請參賽者加入Chat群組" />
+              <TimelineStep date="Week 1" title="8/4 挑戰開始｜賽前測量" description="8/1將提前測量所有成員的體脂率及骨骼肌率，作為起始分數" />
               <TimelineStep date="Week 4" title="期中測量" description="為了讓比賽更有趣，期中也會測量一次" />
-              <TimelineStep date="Week 8" title="最終測量｜分數結算" description="這兩個月的增肌減脂分數與運動打卡分數加總，將揭曉最終的冠軍！" />
+              <TimelineStep date="Week 8" title="9/28 分數結算｜賽後測量" description="這兩個月的增肌減脂分數與運動打卡分數加總，將揭曉最終的冠軍！" />
           </div>
       </section>
 
@@ -120,7 +121,7 @@ const HomePage: React.FC = () => {
       <section>
           <h2 className="text-3xl font-bold text-center text-white mb-12">參加的話，我需要做什麼？</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
-              <RuleStep number={1} title="找到你的神隊友" description="兩人須同性別;其中一人代表填寫表單。" />
+              <RuleStep number={1} title="團隊合作" description="和你的隊友一起合作、互相激勵，成為彼此的神隊友" />
               <RuleStep number={2} title="每週運動打卡" description="每人每週運動3次，每次30分鐘，上傳認證照後可為團隊+1分" />
               <RuleStep number={3} title="驚喜小任務" description="活動過程可能會有驚喜小任務，或許是與其他隊伍拉開差距的好機會" />
               <RuleStep number={4} title="測量身體數值" description="參與期初、期中、期末測量，計算肌肉與體脂變化" />
