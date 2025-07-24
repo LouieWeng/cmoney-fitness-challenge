@@ -19,12 +19,12 @@ const Header: React.FC = () => {
           </div>
           {/* Desktop Nav */}
           <nav className="hidden md:flex md:space-x-8">
-            <NavLink
-              to="/rules"
-              className={({ isActive }) => (isActive ? activeLinkClass : inactiveLinkClass)}
-            >
+            <a href="https://docs.google.com/document/d/16-CGEZQCYxAekVy1dXnMB1hbricRomGm5XHLoN4Rcro/edit?tab=t.0#heading=h.w8y7f4xkl558"
+               target="_blank"
+               rel="noopener noreferrer"
+               className={inactiveLinkClass} >
               完整規則
-            </NavLink>
+            </a>
             <NavLink
               to="/ranking"
               className={({ isActive }) => (isActive ? activeLinkClass : inactiveLinkClass)}
