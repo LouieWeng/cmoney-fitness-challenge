@@ -14,16 +14,3 @@ root.render(
     <App />
   </React.StrictMode>
 );
-
-import { Analytics } from '@vercel/analytics/react';
-
-function App() {
-  return (
-    <>
-      {/* 你的其他組件 */}
-      <Analytics />
-    </>
-  );
-}
-
-export default App;
