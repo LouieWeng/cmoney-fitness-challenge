@@ -83,8 +83,8 @@ const HomePage: React.FC = () => {
         </div>
         <div className="flex justify-center">
             <img 
-                src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
-                alt="Two women exercising together" 
+                src="/exercise.png" 
+                alt="CM增肌減脂比賽" 
                 className="rounded-lg shadow-2xl object-cover w-full h-full max-h-[500px]" 
             />
         </div>
