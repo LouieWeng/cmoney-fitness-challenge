@@ -108,12 +108,14 @@ const HomePage: React.FC = () => {
 
       {/* Timeline Section */}
       <section>
-          <h2 className="text-3xl font-bold text-center text-white mb-12">挑戰時程</h2>
+          <h2 className="text-3xl font-bold text-center text-white mb-12">活動時程</h2>
           <div className="max-w-3xl mx-auto">
-              <TimelineStep date="Register" title="7/28-7/30 報名" description="以Google表單填寫報名資訊，報名後會邀請參賽者加入Chat群組" />
-              <TimelineStep date="Week 1" title="8/4 挑戰開始｜賽前測量" description="8/1將提前測量所有成員的體脂率及骨骼肌率，作為起始分數" />
-              <TimelineStep date="Week 4" title="期中測量" description="為了讓比賽更有趣，期中也會測量一次" />
-              <TimelineStep date="Week 8" title="9/28 分數結算｜賽後測量" description="這兩個月的增肌減脂分數與運動打卡分數加總，將揭曉最終的冠軍！" />
+              <TimelineStep date="報名時程" title="7/28 (一)- 7/30 (三)" description="以Google表單填寫報名資訊，報名後會邀請參賽者加入Chat群組，公告組別號碼" />
+              <TimelineStep date="賽前測量" title="8/1 (五) 10:00-12:00" description="依據報名結果區分量測時段，以公司指定之 InBody 機台，以及拍照紀錄、建檔" />
+              <TimelineStep date="正式開賽" title="8/4 (一)" description="全體參賽者開始紀錄運動與飲食，展開 8週 的健身挑戰之旅，累積團隊總分" />
+              <TimelineStep date="比賽結束" title="9/28 (日)" description="挑戰正式結束，停止分數累積，準備進行最終的成果彙整" />
+              <TimelineStep date="賽後測量" title="9/29 (一) 10:00-12:00" description="量測 InBody、拍照紀錄，加總分數決定最終勝利隊伍" />
+              <TimelineStep date="公告頒獎" title="10/1(三)" description="公布優勝隊伍，頒發獎金！" />
           </div>
       </section>
 
@@ -124,7 +126,7 @@ const HomePage: React.FC = () => {
               <RuleStep number={1} title="團隊合作" description="和你的隊友一起合作、互相激勵，成為彼此的神隊友" />
               <RuleStep number={2} title="每週運動打卡" description="每人每週運動3次，每次30分鐘，上傳認證照後可為團隊+1分" />
               <RuleStep number={3} title="驚喜小任務" description="活動過程可能會有驚喜小任務，或許是與其他隊伍拉開差距的好機會" />
-              <RuleStep number={4} title="測量身體數值" description="參與期初、期中、期末測量，計算肌肉與體脂變化" />
+              <RuleStep number={4} title="測量身體數值" description="參與賽前與賽後測量，計算肌肉與體脂變化" />
           </div>
           <div className="text-center mt-12">
               <button onClick={() => navigate('/rules')} className="inline-block bg-slate-700 text-white font-bold py-3 px-8 rounded-lg hover:bg-slate-600 transition-colors">
