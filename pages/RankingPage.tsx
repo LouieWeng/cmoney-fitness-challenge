@@ -25,7 +25,7 @@ const RankingPage: React.FC = () => {
           每週一將結算前一週的運動打卡分數，並且更新到賽況。
         </p>
         <p className="mt-3 max-w-2xl mx-auto text-lg text-slate-300">
-          最近更新：2025/07/22
+          最近更新：2025/07/24
         </p>
       </section>
 
