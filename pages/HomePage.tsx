@@ -129,9 +129,12 @@ const HomePage: React.FC = () => {
               <RuleStep number={4} title="測量身體數值" description="參與賽前與賽後測量，計算肌肉與體脂變化" />
           </div>
           <div className="text-center mt-12">
-              <button onClick={() => navigate('/rules')} className="inline-block bg-slate-700 text-white font-bold py-3 px-8 rounded-lg hover:bg-slate-600 transition-colors">
-                  看完整規則
-              </button>
+              <a href="https://docs.google.com/document/d/16-CGEZQCYxAekVy1dXnMB1hbricRomGm5XHLoN4Rcro/edit?tab=t.0#heading=h.w8y7f4xkl558"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block bg-slate-700 text-white font-bold py-3 px-8 rounded-lg hover:bg-slate-600 transition-colors">
+                看完整規則
+              </a>
           </div>
       </section>
 
