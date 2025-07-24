@@ -1,4 +1,6 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { GOOGLE_DRIVE_URL, SIGNUP_FORM_URL } from '../constants';
 
 const FaqItem: React.FC<{ question: string; children: React.ReactNode }> = ({ question, children }) => (
     <div className="bg-slate-800 p-6 rounded-lg">

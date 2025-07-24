@@ -111,8 +111,8 @@ const HomePage: React.FC = () => {
           <h2 className="text-3xl font-bold text-center text-white mb-12">活動時程</h2>
           <div className="max-w-3xl mx-auto">
               <TimelineStep date="報名時程" title="7/28 (一)- 7/30 (三)" description="以Google表單填寫報名資訊，報名後會邀請參賽者加入Chat群組，公告組別號碼" />
-              <TimelineStep date="賽前測量" title="8/1 (五) 10:00-12:00" description="依據報名結果區分量測時段，以公司指定之 InBody 機台，以及拍照紀錄、建檔" />
-              <TimelineStep date="正式開賽" title="8/4 (一)" description="全體參賽者開始紀錄運動與飲食，展開 8週 的健身挑戰之旅，累積團隊總分" />
+              <TimelineStep date="賽前測量" title="8/1 (五) 10:00-12:00" description="依據報名結果區分量測時段，統一使用公司的 InBody 儀器測量，以及拍照紀錄、建檔" />
+              <TimelineStep date="正式開賽" title="8/4 (一)" description="全體參賽者開始紀錄運動與飲食，展開8週的健身挑戰之旅，累積團隊總分" />
               <TimelineStep date="比賽結束" title="9/28 (日)" description="挑戰正式結束，停止分數累積，準備進行最終的成果彙整" />
               <TimelineStep date="賽後測量" title="9/29 (一) 10:00-12:00" description="量測 InBody、拍照紀錄，加總分數決定最終勝利隊伍" />
               <TimelineStep date="公告頒獎" title="10/1(三)" description="公布優勝隊伍，頒發獎金！" />
@@ -151,7 +151,7 @@ const HomePage: React.FC = () => {
       <section className="bg-slate-800 rounded-lg p-8">
         <div className="flex flex-col md:flex-row items-center justify-center md:justify-between gap-6">
             <div className="text-center md:text-left">
-                <h2 className="text-2xl font-bold text-white">準備好要變更建康了嗎</h2>
+                <h2 className="text-2xl font-bold text-white">準備好要變更健康了嗎？</h2>
                 <p className="text-slate-300 mt-1">找到你的神隊友後，就趕快填表單報名吧！男女生各限15組</p>
             </div>
             <div className="flex flex-col sm:flex-row gap-4 flex-shrink-0">

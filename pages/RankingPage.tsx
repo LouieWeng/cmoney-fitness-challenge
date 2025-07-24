@@ -66,7 +66,7 @@ const RankingPage: React.FC = () => {
       <section className="bg-slate-800 rounded-lg p-8">
         <div className="flex flex-col md:flex-row items-center justify-center md:justify-between gap-6">
             <div className="text-center md:text-left">
-                <h2 className="text-2xl font-bold text-white">準備好要變更建康了嗎</h2>
+                <h2 className="text-2xl font-bold text-white">準備好要變更健康了嗎？</h2>
                 <p className="text-slate-300 mt-1">找到你的神隊友後，就趕快填表單報名吧！男女生各限15組</p>
             </div>
             <div className="flex flex-col sm:flex-row gap-4 flex-shrink-0">
