@@ -110,7 +110,7 @@ const HomePage: React.FC = () => {
       <section>
           <h2 className="text-3xl font-bold text-center text-white mb-12">活動時程</h2>
           <div className="max-w-3xl mx-auto">
-              <TimelineStep date="報名時程" title="7/28 (一)- 7/30 (三)" description="以Google表單填寫報名資訊，報名後會邀請參賽者加入Chat群組，公告組別號碼" />
+              <TimelineStep date="報名時程" title="7/25 (五)- 7/30 (三)" description="以Google表單填寫報名資訊，報名後會邀請參賽者加入Chat群組，公告組別號碼" />
               <TimelineStep date="賽前測量" title="8/1 (五) 10:00-12:00" description="依據報名結果區分量測時段，統一使用公司的 InBody 儀器測量，以及拍照紀錄、建檔" />
               <TimelineStep date="正式開賽" title="8/4 (一)" description="全體參賽者開始紀錄運動與飲食，展開8週的健身挑戰之旅，累積團隊總分" />
               <TimelineStep date="比賽結束" title="9/28 (日)" description="挑戰正式結束，停止分數累積，準備進行最終的成果彙整" />
