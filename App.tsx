@@ -1,11 +1,12 @@
 import React from 'react';
-import { HashRouter as Router } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
+import { Analytics } from '@vercel/analytics/react';
+
 import HomePage from './pages/HomePage';
 import RulesPage from './pages/RulesPage';
 import RankingPage from './pages/RankingPage';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import { Analytics } from '@vercel/analytics/react';
 
 const App: React.FC = () => {
   return (
@@ -23,7 +24,7 @@ const App: React.FC = () => {
           <Footer />
         </div>
       </Router>
-      <Analytics /> {/* 放在 Router 外層，避免影響 layout */}
+      <Analytics />
     </>
   );
 };
