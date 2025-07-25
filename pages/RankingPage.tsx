@@ -15,6 +15,13 @@ const RankingPage: React.FC = () => {
   const sortedTeams: Team[] = [...TEAMS_DATA].sort((a, b) => b.points - a.points);
   const gradientText = "bg-gradient-to-r from-[#92FFFE] to-[#C4FF77] text-transparent bg-clip-text";
 
+  //吃constants的性別資料
+  const [gender, setGender] = useState<'male' | 'female'>('male');
+  const filteredTeams = TEAMS_DATA
+  .filter((team) => team.gender === gender)
+  .sort((a, b) => b.points - a.points);
+
+
   return (
     <div className="space-y-12">
       <section className="text-center">
@@ -28,6 +35,13 @@ const RankingPage: React.FC = () => {
           最近更新：2025/07/24
         </p>
       </section>
+
+      {/*男女子組頁籤*/}
+      <div className="flex justify-center gap-4">
+        <button onClick={() => setGender('male')}>男子組</button>
+        <button onClick={() => setGender('female')}>女子組</button>
+      </div>
+
 
       <section className="max-w-4xl mx-auto">
         <div className="bg-slate-800 shadow-lg rounded-lg overflow-hidden">
