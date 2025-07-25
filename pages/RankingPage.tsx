@@ -76,6 +76,7 @@ const RankingPage: React.FC = () => {
                   <th className="px-6 py-3 text-left text-xs font-medium text-slate-300 uppercase tracking-wider">排名</th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-slate-300 uppercase tracking-wider">組別</th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-slate-300 uppercase tracking-wider">成員</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-slate-300 uppercase tracking-wider">每週運動打卡</th>
                   <th className="px-6 py-3 text-right text-xs font-medium text-slate-300 uppercase tracking-wider">當前積分</th>
                 </tr>
               </thead>
@@ -90,6 +91,9 @@ const RankingPage: React.FC = () => {
                     <td className="px-6 py-4 whitespace-nowrap font-medium text-white">#{team.id}</td>
                     <td className="px-6 py-4 whitespace-nowrap text-slate-300">
                       {team.members.join(' & ')}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-slate-300 text-center">
+                      +{team.exercise || 0}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-right text-emerald-400 font-bold text-lg">
                       {team.points}
