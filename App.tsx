@@ -21,7 +21,7 @@ const App: React.FC = () => {
           </Routes>
         </main>
         <Footer />
-        <Analytics /> {/* ✅ 這行是你啟用網站追蹤的關鍵 */}
+        <Analytics /> {/* 👈 不影響版面的追蹤元件 */}
       </div>
     </Router>
   );
