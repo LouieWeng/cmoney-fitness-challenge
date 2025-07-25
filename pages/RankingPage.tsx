@@ -39,31 +39,32 @@ const RankingPage: React.FC = () => {
 
       {/*男女子組頁籤*/}
       <div className="flex justify-center">
-      <div className="flex bg-slate-800 p-1 rounded-full">
-        <button
-          onClick={() => setGender('male')}
-          className={`px-5 py-2 rounded-full font-bold transition ${
-            gender === 'male'
-              ? 'bg-gradient-to-r from-[#92FFFE] to-[#C4FF77] text-slate-900'
-              : 'text-white'
-          }`}
-        >
-          男子組
-        </button>
-        <button
-          onClick={() => setGender('female')}
-          className={`px-5 py-2 rounded-full font-bold transition ${
-            gender === 'female'
-              ? 'bg-gradient-to-r from-[#92FFFE] to-[#C4FF77] text-slate-900'
-              : 'text-white'
-          }`}
-        >
-          女子組
-        </button>
+        <div className="relative flex bg-slate-800 p-1 rounded-full w-fit">
+          {/* Animated gradient background */}
+          <div
+            className={`absolute top-1 left-1 h-[calc(100%-0.5rem)] w-1/2 rounded-full bg-gradient-to-r from-[#92FFFE] to-[#C4FF77] transition-transform duration-300 ease-in-out ${
+              gender === 'female' ? 'translate-x-full' : ''
+            }`}
+          />
+          {/* Buttons */}
+          <button
+            onClick={() => setGender('male')}
+            className={`relative z-10 px-5 py-2 rounded-full font-bold transition ${
+              gender === 'male' ? 'text-slate-900' : 'text-white'
+            }`}
+          >
+            男子組
+          </button>
+          <button
+            onClick={() => setGender('female')}
+            className={`relative z-10 px-5 py-2 rounded-full font-bold transition ${
+              gender === 'female' ? 'text-slate-900' : 'text-white'
+            }`}
+          >
+            女子組
+          </button>
+        </div>
       </div>
-    </div>
-
-
 
       <section className="max-w-4xl mx-auto">
         <div className="bg-slate-800 shadow-lg rounded-lg overflow-hidden">
