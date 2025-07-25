@@ -42,8 +42,8 @@ const RankingPage: React.FC = () => {
         <div className="relative flex bg-slate-800 p-1 rounded-full w-fit">
           {/* Animated gradient background */}
           <div
-            className={`absolute top-1 left-1 h-[calc(100%-0.5rem)] w-1/2 rounded-full bg-gradient-to-r from-[#92FFFE] to-[#C4FF77] transition-transform duration-300 ease-in-out ${
-              gender === 'female' ? 'translate-x-[calc(100%-0.5rem)]' : ''
+            className={`absolute top-1 left-1 h-[calc(100%-0.6rem)] w-1/2 rounded-full bg-gradient-to-r from-[#92FFFE] to-[#C4FF77] transition-transform duration-300 ease-in-out ${
+              gender === 'female' ? 'translate-x-[calc(100%-0.6rem)]' : ''
             }`}
           />
           {/* Buttons */}
