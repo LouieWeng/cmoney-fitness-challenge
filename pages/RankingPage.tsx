@@ -13,7 +13,7 @@ const getTrophyIcon = (rank: number) => {
 
 
 const RankingPage: React.FC = () => {
-  const sortedTeams: Team[] = [...TEAMS_DATA].sort((a, b) => b.points - a.points);
+  //const sortedTeams: Team[] = [...TEAMS_DATA].sort((a, b) => b.points - a.points);
   const gradientText = "bg-gradient-to-r from-[#92FFFE] to-[#C4FF77] text-transparent bg-clip-text";
 
   //吃constants的性別資料
@@ -56,7 +56,26 @@ const RankingPage: React.FC = () => {
                   <th className="px-6 py-3 text-right text-xs font-medium text-slate-300 uppercase tracking-wider">當前積分</th>
                 </tr>
               </thead>
+              {/*為了加入男女生頁籤更新這段*/}
               <tbody className="bg-slate-800 divide-y divide-slate-700">
+                {filteredTeams.map((team, index) => (
+                  <tr key={team.id} className={index < 3 ? 'bg-slate-700/30' : ''}>
+                    <td className="px-6 py-4 whitespace-nowrap text-lg font-bold">
+                      {getTrophyIcon(index + 1)}
+                      <span className="hidden sm:inline">{index + 1}</span>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap font-medium text-white">#{team.id}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-slate-300">
+                      {team.members.join(' & ')}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-right text-emerald-400 font-bold text-lg">
+                      {team.points}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+
+              {/*<tbody className="bg-slate-800 divide-y divide-slate-700">
                 {sortedTeams.map((team, index) => (
                   <tr key={team.id} className={index < 3 ? 'bg-slate-700/30' : ''}>
                     <td className="px-6 py-4 whitespace-nowrap text-lg font-bold">
@@ -68,7 +87,7 @@ const RankingPage: React.FC = () => {
                     <td className="px-6 py-4 whitespace-nowrap text-right text-emerald-400 font-bold text-lg">{team.points}</td>
                   </tr>
                 ))}
-              </tbody>
+              </tbody>*/}
             </table>
           </div>
         </div>
