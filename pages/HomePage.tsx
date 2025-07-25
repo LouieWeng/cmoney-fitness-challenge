@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { GOOGLE_DRIVE_URL, SIGNUP_FORM_URL } from '../constants';
@@ -146,7 +145,7 @@ const HomePage: React.FC = () => {
               <PrizeCard title="女生組" prizes={womenPrizes} />
           </div>
           <p className="text-center text-slate-400 mt-8 max-w-2xl mx-auto">
-              平分將優先比較增肌減脂分數，其次為運動打卡分數。詳見完整規則。
+              平手將優先比較增肌減脂分數，其次為運動打卡分數。詳見完整規則。
           </p>
       </section>
 
