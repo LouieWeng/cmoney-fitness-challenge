@@ -92,10 +92,10 @@ const RankingPage: React.FC = () => {
                     <td className="px-6 py-4 whitespace-nowrap text-slate-300">
                       {team.members.join(' & ')}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-slate-300 text-center">
+                    <td className="px-6 py-4 whitespace-nowrap text-white font-bold text-center">
                       +{team.exercise || 0}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-right text-emerald-400 font-bold text-lg">
+                    <td className="px-6 py-4 whitespace-nowrap text-white font-bold text-right text-emerald-400 font-bold text-lg">
                       {team.points}
                     </td>
                   </tr>
