@@ -89,13 +89,13 @@ const RankingPage: React.FC = () => {
                       <span className="hidden sm:inline">{index + 1}</span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap font-medium text-white">#{team.id}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-slate-300">
+                    <td className="px-6 py-4 whitespace-nowrap text-white font-bold">
                       {team.members.join(' & ')}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-white font-bold text-center">
                       +{team.exercise || 0}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-white font-bold text-right text-emerald-400 font-bold text-lg">
+                    <td className="px-6 py-4 whitespace-nowrap gradientText font-bold text-right text-emerald-400 font-bold text-lg">
                       {team.points}
                     </td>
                   </tr>
