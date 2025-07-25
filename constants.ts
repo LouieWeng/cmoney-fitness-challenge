@@ -4,7 +4,7 @@ export const SIGNUP_FORM_URL = 'https://forms.gle/example';
 export const GOOGLE_DRIVE_URL = 'https://drive.google.com/drive/folders/example';
 
 export const TEAMS_DATA: Team[] = [
-  { id: 1, gender: 'male', members: ['OOO', 'OOO'], points: 0 },
+  { id: 1, gender: 'male', members: ['OOO', 'OOO'], exercise: 0, points: 0 },
   { id: 2, gender: 'male', members: ['OOO', 'OOO'], points: 0 },
   { id: 3, gender: 'male', members: ['OOO', 'OOO'], points: 0 },
   { id: 4, gender: 'male', members: ['OOO', 'OOO'], points: 0 },
