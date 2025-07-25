@@ -43,7 +43,7 @@ const RankingPage: React.FC = () => {
           {/* 滑動底色 */}
           <div
             className={`absolute inset-[2px] w-1/2 rounded-full bg-gradient-to-r from-[#92FFFE] to-[#C4FF77] transition-transform duration-300 ease-in-out ${
-              gender === 'female' ? 'translate-x-full' : 'translate-x-0'
+              gender === 'female' ? 'translate-x-[calc(100%-4px)]' : 'translate-x-0'
             }`}
           />
           {/* 按鈕 */}
