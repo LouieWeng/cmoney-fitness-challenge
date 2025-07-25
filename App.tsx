@@ -11,7 +11,7 @@ const App: React.FC = () => {
   return (
     <>
       <Router>
-        <div className="min-h-screen flex flex-col bg-slate-900 text-white">
+        <div className="flex flex-col min-h-screen bg-slate-900 text-white px-4 pt-20">
           <Header />
           <main className="flex-grow pt-12 md:pt-16 lg:pt-20 px-4">
             <Routes>
@@ -23,7 +23,7 @@ const App: React.FC = () => {
           <Footer />
         </div>
       </Router>
-      <Analytics /> {/* 放在 Router 外層就不會干擾版面 */}
+      <Analytics /> {/* 放在 Router 外層，避免影響 layout */}
     </>
   );
 };
