@@ -38,28 +38,31 @@ const RankingPage: React.FC = () => {
       </section>
 
       {/*男女子組頁籤*/}
-      <div className="flex justify-center gap-4">
+      <div className="flex justify-center">
+      <div className="flex bg-slate-800 p-1 rounded-full">
         <button
           onClick={() => setGender('male')}
-          className={`px-4 py-2 rounded font-bold transition ${
+          className={`px-5 py-2 rounded-full font-bold transition ${
             gender === 'male'
               ? 'bg-gradient-to-r from-[#92FFFE] to-[#C4FF77] text-slate-900'
-              : 'bg-slate-700 text-white'
+              : 'text-white'
           }`}
         >
           男子組
         </button>
         <button
           onClick={() => setGender('female')}
-          className={`px-4 py-2 rounded font-bold transition ${
+          className={`px-5 py-2 rounded-full font-bold transition ${
             gender === 'female'
               ? 'bg-gradient-to-r from-[#92FFFE] to-[#C4FF77] text-slate-900'
-              : 'bg-slate-700 text-white'
+              : 'text-white'
           }`}
         >
           女子組
         </button>
       </div>
+    </div>
+
 
 
       <section className="max-w-4xl mx-auto">
