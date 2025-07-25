@@ -39,18 +39,17 @@ const RankingPage: React.FC = () => {
 
       {/*男女子組頁籤*/}
       <div className="flex justify-center">
-        <div className="relative flex bg-slate-800 p-1 rounded-full w-fit">
-          {/* Animated gradient background */}
+        <div className="relative inline-flex bg-slate-800 p-1 rounded-full">
+          {/* 滑動底色 */}
           <div
             className={`absolute inset-[2px] w-1/2 rounded-full bg-gradient-to-r from-[#92FFFE] to-[#C4FF77] transition-transform duration-300 ease-in-out ${
               gender === 'female' ? 'translate-x-full' : 'translate-x-0'
             }`}
           />
-
-          {/* Buttons */}
+          {/* 按鈕 */}
           <button
             onClick={() => setGender('male')}
-            className={`relative z-10 px-5 py-2 rounded-full font-bold transition ${
+            className={`relative z-10 px-6 py-2 text-center font-bold rounded-full min-w-[96px] transition ${
               gender === 'male' ? 'text-slate-900' : 'text-white'
             }`}
           >
@@ -58,7 +57,7 @@ const RankingPage: React.FC = () => {
           </button>
           <button
             onClick={() => setGender('female')}
-            className={`relative z-10 px-5 py-2 rounded-full font-bold transition ${
+            className={`relative z-10 px-6 py-2 text-center font-bold rounded-full min-w-[96px] transition ${
               gender === 'female' ? 'text-slate-900' : 'text-white'
             }`}
           >
@@ -66,6 +65,7 @@ const RankingPage: React.FC = () => {
           </button>
         </div>
       </div>
+
 
       <section className="max-w-4xl mx-auto">
         <div className="bg-slate-800 shadow-lg rounded-lg overflow-hidden">
