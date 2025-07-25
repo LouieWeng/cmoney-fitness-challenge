@@ -95,8 +95,10 @@ const RankingPage: React.FC = () => {
                     <td className="px-6 py-4 whitespace-nowrap text-white text-center">
                       +{team.exercise || 0}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap font-bold text-right font-bold gradientText text-lg">
-                      {team.points}
+                    <td className="px-6 py-4 whitespace-nowrap font-bold text-right font-bold text-lg">
+                      <span className={gradientText}>
+                        {team.points}
+                      </span>
                     </td>
                   </tr>
                 ))}
