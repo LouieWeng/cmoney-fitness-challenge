@@ -96,7 +96,7 @@ const RankingPage: React.FC = () => {
                       {getTrophyIcon(index + 1)}
                       <span className="hidden sm:inline">{index + 1}</span>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap font-medium text-white">#{team.id}{team.name}</td>
+                    <td className="px-6 py-4 whitespace-nowrap font-medium text-white">#{team.id} {team.name}</td>
                     <td className="px-6 py-4 whitespace-nowrap text-white">
                       {team.members.join(' & ')}
                     </td>
