@@ -34,6 +34,7 @@ export const TEAMS_DATA: Team[] = [
   { id: 28, gender: 'female', members: ['OOO', 'OOO'], exercise: 0, points: 0 },
   { id: 29, gender: 'female', members: ['OOO', 'OOO'], exercise: 0, points: 0 },
   { id: 30, gender: 'female', members: ['OOO', 'OOO'], exercise: 0, points: 0 },
+  { id: 31, gender: 'female', members: ['OOO', 'OOO'], exercise: 0, points: 0 },
 ];
 
 
