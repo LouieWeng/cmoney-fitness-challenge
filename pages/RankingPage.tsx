@@ -3,19 +3,11 @@ import React, { useState } from 'react';
 import { TEAMS_DATA, SIGNUP_FORM_URL, GOOGLE_DRIVE_URL } from '../constants';
 import { Team } from '../types';
 
-// const getTrophyIcon = (rank: number) => {
-//   const iconClass = "h-6 w-6 inline-block mr-2";
-//   if (rank === 1) return <span className={`${iconClass} text-yellow-400`}>🏆</span>;
-//   if (rank === 2) return <span className={`${iconClass} text-slate-300`}>🥈</span>;
-//   if (rank === 3) return <span className={`${iconClass} text-yellow-600`}>🥉</span>;
-//   return <span className={`${iconClass} text-transparent`}>{rank}</span>;
-// };
-
 const getTrophyIcon = (rank: number) => {
   const iconClass = "h-6 w-6 inline-block mr-2";
-  if (rank === 1) return <span className={`${iconClass} text-yellow-400`}></span>;
-  if (rank === 2) return <span className={`${iconClass} text-slate-300`}></span>;
-  if (rank === 3) return <span className={`${iconClass} text-yellow-600`}></span>;
+  if (rank === 1) return <span className={`${iconClass} text-yellow-400`}>🏆</span>;
+  if (rank === 2) return <span className={`${iconClass} text-slate-300`}>🥈</span>;
+  if (rank === 3) return <span className={`${iconClass} text-yellow-600`}>🥉</span>;
   return <span className={`${iconClass} text-transparent`}>{rank}</span>;
 };
 
@@ -80,7 +72,7 @@ const RankingPage: React.FC = () => {
             <table className="min-w-full">
               <thead className="bg-slate-700/50">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-slate-300 uppercase tracking-wider">排名</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-slate-300 uppercase tracking-wider">編號</th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-slate-300 uppercase tracking-wider">組別</th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-slate-300 uppercase tracking-wider">成員</th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-slate-300 uppercase tracking-wider">每週運動打卡</th>
