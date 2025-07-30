@@ -3,6 +3,15 @@ import React, { useState } from 'react';
 import { TEAMS_DATA, SIGNUP_FORM_URL, GOOGLE_DRIVE_URL } from '../constants';
 import { Team } from '../types';
 
+// 賽前隱藏排名
+// const getTrophyIcon = (rank: number) => {
+//   const iconClass = "h-6 w-6 inline-block mr-2";
+//   if (rank === 1) return <span className={`${iconClass} text-yellow-400`}>🏆</span>;
+//   if (rank === 2) return <span className={`${iconClass} text-slate-300`}>🥈</span>;
+//   if (rank === 3) return <span className={`${iconClass} text-yellow-600`}>🥉</span>;
+//   return <span className={`${iconClass} text-transparent`}>{rank}</span>;
+// };
+
 const getTrophyIcon = (rank: number) => {
   const iconClass = "h-6 w-6 inline-block mr-2";
   if (rank === 1) return <span className={`${iconClass} text-yellow-400`}>🏆</span>;
