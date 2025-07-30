@@ -97,7 +97,12 @@ const RankingPage: React.FC = () => {
                       <span className="hidden sm:inline">{index + 1}</span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap font-medium text-white">
-                      <span className="text-slate-400">#{team.id}</span> {team.name}
+                      <span className="bg-slate-600 text-white text-sm font-bold px-2 py-1 rounded-md mr-2 inline-block">
+                        #{team.id}
+                      </span>
+                      {/*<span className="text-slate-400">#{team.id}
+                      </span>*/}
+                       {team.name}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-white">
                       {team.members.join(' & ')}
