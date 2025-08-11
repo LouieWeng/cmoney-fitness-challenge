@@ -140,7 +140,7 @@ const RankingPage: React.FC = () => {
         </p>
       </section>
 
-      <section className="bg-slate-800 rounded-lg p-8">
+      {/*<section className="bg-slate-800 rounded-lg p-8">
         <div className="flex flex-col md:flex-row items-center justify-center md:justify-between gap-6">
             <div className="text-center md:text-left">
                 <h2 className="text-2xl font-bold text-white">準備好要變更健康了嗎？</h2>
@@ -152,10 +152,10 @@ const RankingPage: React.FC = () => {
                 </a>
                 {/*<a href={"https://drive.google.com/drive/u/0/folders/1d-JmO9mOgzwFn-2AMeuIUuh-IM_5qSrv"} target="_blank" rel="noopener noreferrer" className="inline-block bg-slate-700 text-white font-bold py-3 px-8 rounded-lg hover:bg-slate-600 transition-colors">
                     上傳認證照
-                </a>*/}
+                </a>
             </div>
         </div>
-      </section>
+      </section>*/}
     </div>
   );
 };
