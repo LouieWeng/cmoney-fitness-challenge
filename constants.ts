@@ -4,8 +4,8 @@ export const SIGNUP_FORM_URL = 'https://forms.gle/example';
 export const GOOGLE_DRIVE_URL = 'https://drive.google.com/drive/folders/example';
 
 export const TEAMS_DATA: Team[] = [
-  { id: 1, gender: 'female', name: '鍶去的脂肪庭止再生', members: ['陳郁庭', '許瀞鍶'], exercise: 0, points: 0 },
-  { id: 2, gender: 'female', name: '斯巴達增肌減脂戰士', members: ['謝家芸', '翁憶如'], exercise: 0, points: 0 },
+  { id: 1, gender: 'female', name: '鍶去的脂肪庭止再生', members: ['陳郁庭', '許瀞鍶'], exercise: 1, points: 0.4 },
+  { id: 2, gender: 'female', name: '斯巴達增肌減脂戰士', members: ['謝家芸', '翁憶如'], exercise: 2, points: 0.8 },
   { id: 3, gender: 'female', name: '聿罷不寧', members: ['彭聿采', '許家寧'], exercise: 0, points: 0 },
   { id: 4, gender: 'female', name: '吱吱唧唧嘰吱', members: ['劉凡瑀', '施捷如'], exercise: 0, points: 0 },
   { id: 5, gender: 'female', name: '我們只是胖著玩玩', members: ['詹壬菡', '林玉涵'], exercise: 0, points: 0 },
