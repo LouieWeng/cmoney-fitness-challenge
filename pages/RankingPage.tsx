@@ -124,7 +124,10 @@ const RankingPage: React.FC = () => {
 
                 </tr>
               </thead>
-              
+
+              //前三名超過5個不顯示🏆或獎牌
+              const top3Count = withRanks.filter(r => r.rank <= 3).length;
+
               <tbody className="bg-slate-800 divide-y divide-slate-700">
               {withRanks.map(({ team, rank }) => (
                 <tr key={team.id} className={rank <= 3 ? 'bg-slate-700/30' : ''}>
@@ -158,6 +161,7 @@ const RankingPage: React.FC = () => {
 
                   {/* 當前積分欄 */}
                   <td className="px-6 py-4 whitespace-nowrap text-right text-lg font-bold">
+                    {rank <= 3 && top3Count <= 5 ? getTrophyIcon(rank) : null}
                     <span className={gradientText}>{team.points}</span>
                   </td>
                 </tr>

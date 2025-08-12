@@ -11,7 +11,7 @@ export const TEAMS_DATA: Team[] = [
   { id: 5, gender: 'female', name: '我們只是胖著玩玩', members: ['詹壬菡', '林玉涵'], exercise: 1, points: 0.4 },
   { id: 6, gender: 'female', name: '瘦到你認不出我隊', members: ['林雅茹', '張翊琳'], exercise: 2, points: 0.8 },
   { id: 7, gender: 'female', name: '我胖我驕傲', members: ['杜巧琍', '蔡佳玲'], exercise: 2, points: 0.8 },
-  { id: 8, gender: 'female', name: '總是志在參加', members: ['陳玥年', '黃孟淳'], eexercise: 2, points: 0.8 },
+  { id: 8, gender: 'female', name: '總是志在參加', members: ['陳玥年', '黃孟淳'], exercise: 2, points: 0.8 },
   { id: 9, gender: 'female', name: '祐要運動到嫣嫣一息ㄌ：（', members: ['蘇祐萱', '李嫣容'], exercise: 2, points: 0.8 },
   { id: 10, gender: 'female', name: 'GK動態提脂', members: ['林怡汝', '游季婕'], exercise: 2, points: 0.8 },
   { id: 11, gender: 'female', name: '媽媽帶女兒', members: ['沈惟鉦', '莊壹淋'], exercise: 2, points: 0.8 },
