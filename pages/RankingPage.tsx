@@ -125,8 +125,31 @@ const RankingPage: React.FC = () => {
                 </tr>
               </thead>
 
-              //前三名超過5個不顯示🏆或獎牌
-              const top3Count = withRanks.filter(r => r.rank <= 3).length;
+export default function RankingPage() {
+  // 排序、計算排名等
+  const withRanks = filteredTeams.reduce(
+    (acc: Array<{ team: Team; rank: number }>, team, i) => {
+      const prev = acc[i - 1];
+      const rank = i > 0 && prev && team.points === prev.team.points ? prev.rank : i + 1;
+      acc.push({ team, rank });
+      return acc;
+    },
+    []
+  );
+
+
+    // 計算前三名的總數
+  const top3Count = withRanks.filter(r => r.rank <= 3).length;
+
+
+  return (
+    <table className="min-w-full">
+      {/* 你的表頭放這裡 */}
+      <thead className="bg-slate-700/50">
+        <tr>
+          {/* 你的 ths */}
+        </tr>
+      </thead>
 
               <tbody className="bg-slate-800 divide-y divide-slate-700">
               {withRanks.map(({ team, rank }) => (
@@ -167,6 +190,9 @@ const RankingPage: React.FC = () => {
                 </tr>
               ))}
             </tbody>
+      </table>
+  );
+}
 
 
               {/*<tbody className="bg-slate-800 divide-y divide-slate-700">
