@@ -26,10 +26,24 @@ const RankingPage: React.FC = () => {
 
   //吃constants的性別資料
   const [gender, setGender] = useState<'male' | 'female'>('male');
-  const [showScoreTip, setShowScoreTip] = useState(false); // 新增小i
+
+  // 新增小i
+  const [showScoreTip, setShowScoreTip] = useState(false); 
+
   const filteredTeams = TEAMS_DATA
   .filter((team) => team.gender === gender)
   .sort((a, b) => b.points - a.points);
+
+  // 新增：計算同分同名次（standard competition ranking: 1,1,3,4...）
+  const withRanks = filteredTeams.reduce(
+    (acc: Array<{ team: Team; rank: number }>, team, i) => {
+      const prev = acc[i - 1];
+      const rank = i > 0 && prev && team.points === prev.team.points ? prev.rank : i + 1;
+      acc.push({ team, rank });
+      return acc;
+    },
+    []
+  );
 
 
   return (
@@ -111,7 +125,7 @@ const RankingPage: React.FC = () => {
                 </tr>
               </thead>
               {/*為了加入男女生頁籤更新這段*/}
-              <tbody className="bg-slate-800 divide-y divide-slate-700">
+              {/*<tbody className="bg-slate-800 divide-y divide-slate-700">
                 {filteredTeams.map((team, index) => (
                   <tr key={team.id} className={index < 3 ? 'bg-slate-700/30' : ''}>
                     <td className="px-6 py-4 whitespace-nowrap text-lg font-bold">
@@ -124,7 +138,7 @@ const RankingPage: React.FC = () => {
                       </span>
                       {/*<span className="text-slate-400">#{team.id}
                       </span>*/}
-                       {team.name}
+                       {/*{team.name}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-white">
                       {team.members.join(' & ')}
@@ -139,7 +153,46 @@ const RankingPage: React.FC = () => {
                     </td>
                   </tr>
                 ))}
-              </tbody>
+              </tbody>*/}*/}
+              <tbody className="bg-slate-800 divide-y divide-slate-700">
+              {withRanks.map(({ team, rank }) => (
+                <tr key={team.id} className={rank <= 3 ? 'bg-slate-700/30' : ''}>
+                  <td className="px-6 py-4 whitespace-nowrap text-lg font-bold">
+                    {getTrophyIcon(rank)}
+                    <span className="hidden sm:inline">{rank}</span>
+                  </td>
+
+                  {/* 組別欄 */}
+                  <td className="px-6 py-4 whitespace-nowrap font-medium text-white">
+                    <span className="bg-slate-600 text-white text-sm font-bold px-[4px] py-[2px] rounded-md mr-2 inline-block">
+                      #{team.id}
+                    </span>
+                    {team.name}
+                  </td>
+
+                  {/* 成員欄（你的原樣式保留） */}
+                  <td className="px-6 py-4 whitespace-nowrap text-white">
+                    {team.members.map((m, i) => (
+                      <span key={i}>
+                        {m}
+                        {i < team.members.length - 1 && <span className="text-slate-400"> & </span>}
+                      </span>
+                    ))}
+                  </td>
+
+                  {/* 每週運動打卡欄 */}
+                  <td className="px-6 py-4 whitespace-nowrap text-white text-center">
+                    +{team.exercise ?? 0}
+                  </td>
+
+                  {/* 當前積分欄 */}
+                  <td className="px-6 py-4 whitespace-nowrap text-right text-lg font-bold">
+                    <span className={gradientText}>{team.points}</span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+
 
               {/*<tbody className="bg-slate-800 divide-y divide-slate-700">
                 {sortedTeams.map((team, index) => (
