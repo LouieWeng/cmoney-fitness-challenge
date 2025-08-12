@@ -26,6 +26,7 @@ const RankingPage: React.FC = () => {
 
   //吃constants的性別資料
   const [gender, setGender] = useState<'male' | 'female'>('male');
+  const [showScoreTip, setShowScoreTip] = useState(false); // 新增小i
   const filteredTeams = TEAMS_DATA
   .filter((team) => team.gender === gender)
   .sort((a, b) => b.points - a.points);
@@ -85,7 +86,28 @@ const RankingPage: React.FC = () => {
                   <th className="px-6 py-3 text-left text-xs font-medium text-slate-300 uppercase tracking-wider">組別</th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-slate-300 uppercase tracking-wider">成員</th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-slate-300 uppercase tracking-wider">每週運動打卡</th>
-                  <th className="px-6 py-3 text-right text-xs font-medium text-slate-300 uppercase tracking-wider">當前積分</th>
+                  {/*<th className="px-6 py-3 text-right text-xs font-medium text-slate-300 uppercase tracking-wider">當前積分</th>*/}
+                  <th className="px-6 py-3 text-right text-xs font-medium text-slate-300 uppercase tracking-wider">
+                    <span className="align-middle">當前積分</span>
+                    <span className="relative inline-block ml-2">
+                      <button
+                        type="button"
+                        onClick={() => setShowScoreTip(v => !v)}
+                        onBlur={() => setShowScoreTip(false)}
+                        className="align-middle inline-flex items-center justify-center w-4 h-4 rounded-full bg-slate-700 text-slate-200 text-[10px] font-bold"
+                        aria-label="顯示說明"
+                        aria-expanded={showScoreTip}
+                      >
+                        i
+                      </button>
+                      {showScoreTip && (
+                        <div className="absolute right-0 mt-2 w-72 text-left whitespace-normal bg-slate-900 text-slate-100 text-xs px-3 py-2 rounded-md shadow-lg ring-1 ring-slate-700 z-50">
+                          團隊總分 = 兩人的增肌減脂分數加總後 × 60% + 兩人的運動打卡加總 × 40%
+                        </div>
+                      )}
+                    </span>
+                  </th>
+
                 </tr>
               </thead>
               {/*為了加入男女生頁籤更新這段*/}
