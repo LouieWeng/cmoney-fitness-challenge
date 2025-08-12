@@ -124,36 +124,7 @@ const RankingPage: React.FC = () => {
 
                 </tr>
               </thead>
-              {/*為了加入男女生頁籤更新這段*/}
-              {/*<tbody className="bg-slate-800 divide-y divide-slate-700">
-                {filteredTeams.map((team, index) => (
-                  <tr key={team.id} className={index < 3 ? 'bg-slate-700/30' : ''}>
-                    <td className="px-6 py-4 whitespace-nowrap text-lg font-bold">
-                      {getTrophyIcon(index + 1)}
-                      <span className="hidden sm:inline">{index + 1}</span>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap font-medium text-white">
-                      <span className="bg-slate-600 text-white text-sm font-bold px-1.5 py-0.5 rounded-md mr-2 inline-block">
-                        #{team.id}
-                      </span>
-                      {/*<span className="text-slate-400">#{team.id}
-                      </span>*/}
-                       {/*{team.name}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-white">
-                      {team.members.join(' & ')}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-white text-center">
-                      +{team.exercise || 0}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap font-bold text-right font-bold text-lg">
-                      <span className={gradientText}>
-                        {team.points}
-                      </span>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>*/}*/}
+              
               <tbody className="bg-slate-800 divide-y divide-slate-700">
               {withRanks.map(({ team, rank }) => (
                 <tr key={team.id} className={rank <= 3 ? 'bg-slate-700/30' : ''}>
