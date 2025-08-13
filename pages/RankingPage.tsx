@@ -128,10 +128,11 @@ const RankingPage: React.FC = () => {
                 {withRanks.map(({ team, rank }) => (
                   <tr key={team.id} className={rank <= 3 ? 'bg-slate-700/30' : ''}>
                     {/* 排名欄：前三名總數 <= 5 才顯示獎盃/獎牌 */}
-                    <td className="px-6 py-4 whitespace-nowrap text-lg font-bold">
+                   <td className="px-6 py-4 whitespace-nowrap text-lg font-bold flex items-center gap-2">
                       {rank <= 3 && top3Count <= 5 ? getTrophyIcon(rank) : null}
-                      <span className="hidden sm:inline">{rank}</span>
-                    </td>
+                      <span>{rank}</span>
+                   </td>
+
 
                     {/* 組別欄 */}
                     <td className="px-6 py-4 whitespace-nowrap font-medium text-white">
