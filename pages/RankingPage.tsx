@@ -185,6 +185,25 @@ const RankingPage: React.FC = () => {
           提醒：每週需確實完成3次運動打卡，並上傳認證照至雲端，審核通過才會認列積分。
         </p>
       </section>
+
+      {/* Upload Photo Section */}
+      <section className="bg-slate-800 rounded-lg p-8">
+        <div className="flex flex-col md:flex-row items-center justify-center md:justify-between gap-6">
+            <div className="text-center md:text-left">
+                <h2 className="text-2xl font-bold text-white">看完戰況忍不住想運動了嗎？</h2>
+                <p className="text-slate-300 mt-1">快去揮灑汗水並上傳照片吧！</p>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-4 flex-shrink-0">
+                <a href={"https://forms.gle/RjWVDVjESkKVapJf6"} target="_blank" rel="noopener noreferrer" className="inline-block bg-gradient-to-r from-[#92FFFE] to-[#C4FF77] text-slate-900 font-bold py-3 px-8 rounded-lg hover:brightness-110 transition-all">
+                    上傳認證照
+                </a>
+                <a href={"https://drive.google.com/drive/u/0/folders/1d-JmO9mOgzwFn-2AMeuIUuh-IM_5qSrv"} target="_blank" rel="noopener noreferrer" className="inline-block bg-slate-700 text-white font-bold py-3 px-8 rounded-lg hover:bg-slate-600 transition-colors">
+                    上傳認證照
+                </a>
+            </div>
+        </div>
+      </section>
+
     </div>
   );
 };
