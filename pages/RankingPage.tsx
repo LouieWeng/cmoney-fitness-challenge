@@ -108,7 +108,7 @@ const RankingPage: React.FC = () => {
                         type="button"
                         onClick={() => setShowScoreTip((v) => !v)}
                         onBlur={() => setShowScoreTip(false)}
-                        className="align-middle inline-flex items-center justify-center w-4 h-4 rounded-full bg-slate-700 text-slate-200 text-[10px] font-bold"
+                        className="align-middle inline-flex items-center justify-center w-4 h-4 rounded-full bg-slate-500 text-slate-200 text-[10px] font-bold"
                         aria-label="顯示說明"
                         aria-expanded={showScoreTip}
                       >
