@@ -99,7 +99,8 @@ const RankingPage: React.FC = () => {
                     成員
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-slate-300 uppercase tracking-wider">
-                    每週運動打卡
+                    每週<span className="hidden sm:inline">運動打卡</span>
+                    <span className="sm:hidden"><br />運動打卡</span>
                   </th>
                   <th className="px-6 py-3 text-right text-xs font-medium text-slate-300 uppercase tracking-wider">
                     <span className="align-middle">當前積分</span>
