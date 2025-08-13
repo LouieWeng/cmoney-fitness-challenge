@@ -155,7 +155,7 @@ const RankingPage: React.FC = () => {
                     </td>
 
                     {/* 每週運動打卡欄 */}
-                    <td className="px-6 py-4 whitespace-nowrap text-white text-center">
+                    <td className="px-6 py-4 whitespace-normal break-words text-white text-center">
                       +{team.exercise ?? 0}
                     </td>
 
