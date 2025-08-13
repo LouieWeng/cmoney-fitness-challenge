@@ -98,10 +98,20 @@ const RankingPage: React.FC = () => {
                   <th className="px-6 py-3 text-left text-xs font-medium text-slate-300 uppercase tracking-wider">
                     成員
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-slate-300 uppercase tracking-wider">
-                    每週<span className="hidden sm:inline">運動打卡</span>
-                    <span className="sm:hidden"><br />運動打卡</span>
+                  <th
+                    className="
+                      px-3 sm:px-6 py-3
+                      text-center text-xs font-medium text-slate-300 uppercase tracking-wider
+                      whitespace-normal leading-snug
+                      min-w-[72px]   /* 給手機一個最小寬度，避免被擠成直排 */
+                    "
+                  >
+                    {/* 桌機顯示一行 */}
+                    <span className="hidden sm:inline">每週運動打卡</span>
+                    {/* 手機顯示兩行 */}
+                    <span className="sm:hidden">每週<br />運動打卡</span>
                   </th>
+
                   <th className="px-6 py-3 text-right text-xs font-medium text-slate-300 uppercase tracking-wider">
                     <span className="align-middle">當前積分</span>
                     <span className="relative inline-block ml-2">
