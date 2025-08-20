@@ -89,188 +89,191 @@ const RankingPage: React.FC = () => {
       {/* 排行表 */}
       <section className="max-w-4xl mx-auto">
         <div className="bg-slate-800 shadow-lg rounded-lg overflow-hidden">
+
+
+          
 {/* ====== 只改 table 區塊：從這裡開始 ====== */}
-<div className="overflow-x-auto">
-  {/*
-    這裡只在 table 區塊內宣告小工具，不影響外面其它程式。
-    - 週欄位鍵值：W1~W8
-    - 合計、公式、排名處理
-  */}
-  {(() => {
-    type AnyTeam = Team & {
-      // 若你的資料結構不是 w1~w8，請把下面 key 換成你自己的欄位名稱
-      w1?: number; w2?: number; w3?: number; w4?: number;
-      w5?: number; w6?: number; w7?: number; w8?: number;
-      exercise?: number;   // 額外小計（可有可無）
-      surprise?: number;   // 驚喜任務
-      points?: number;     // 增肌減脂分數加總
-      name?: string;       // 隊名
-      members: string[];
-    };
+      <div className="overflow-x-auto">
+        {/*
+          這裡只在 table 區塊內宣告小工具，不影響外面其它程式。
+          - 週欄位鍵值：W1~W8
+          - 合計、公式、排名處理
+        */}
+        {(() => {
+          type AnyTeam = Team & {
+            // 若你的資料結構不是 w1~w8，請把下面 key 換成你自己的欄位名稱
+            w1?: number; w2?: number; w3?: number; w4?: number;
+            w5?: number; w6?: number; w7?: number; w8?: number;
+            exercise?: number;   // 額外小計（可有可無）
+            surprise?: number;   // 驚喜任務
+            points?: number;     // 增肌減脂分數加總
+            name?: string;       // 隊名
+            members: string[];
+          };
 
-    const weekKeys = ['w1','w2','w3','w4','w5','w6','w7','w8'] as const;
-    const getWeek = (t: AnyTeam, k: typeof weekKeys[number]) =>
-      Number(((t as any)[k] ?? 0) || 0);
-    const sumWeeks = (t: AnyTeam) =>
-      weekKeys.reduce((s, k) => s + getWeek(t, k), 0);
+          const weekKeys = ['w1','w2','w3','w4','w5','w6','w7','w8'] as const;
+          const getWeek = (t: AnyTeam, k: typeof weekKeys[number]) =>
+            Number(((t as any)[k] ?? 0) || 0);
+          const sumWeeks = (t: AnyTeam) =>
+            weekKeys.reduce((s, k) => s + getWeek(t, k), 0);
 
-    // 💪 打卡總和（8 週加總 + 額外 exercise）
-    const getWorkoutSum = (t: AnyTeam) =>
-      sumWeeks(t) + (t.exercise ?? 0);
+          // 💪 打卡總和（8 週加總 + 額外 exercise）
+          const getWorkoutSum = (t: AnyTeam) =>
+            sumWeeks(t) + (t.exercise ?? 0);
 
-    // ✅ 當前積分公式：
-    // 兩人的增肌減脂分數加總 × 60% ＋ 兩人的（運動打卡 + 驚喜任務）加總 × 40%
-    const getTotalScore = (t: AnyTeam) => {
-      const body = t.points ?? 0;
-      const activity = getWorkoutSum(t) + (t.surprise ?? 0);
-      return body * 0.6 + activity * 0.4;
-    };
+          // ✅ 當前積分公式：
+          // 兩人的增肌減脂分數加總 × 60% ＋ 兩人的（運動打卡 + 驚喜任務）加總 × 40%
+          const getTotalScore = (t: AnyTeam) => {
+            const body = t.points ?? 0;
+            const activity = getWorkoutSum(t) + (t.surprise ?? 0);
+            return body * 0.6 + activity * 0.4;
+          };
 
-    const fmt1 = (n: number) => (Math.round(n * 10) / 10).toFixed(1).replace(/\.0$/, '.0');
+          const fmt1 = (n: number) => (Math.round(n * 10) / 10).toFixed(1).replace(/\.0$/, '.0');
 
-    // 以新總分做排序＋同分同名次（1,1,3,4 …）
-    const baseRows = [...TEAMS_DATA.filter(t => t.gender === gender)] as AnyTeam[];
-    const sorted = baseRows
-      .map(t => ({ team: t, total: getTotalScore(t) }))
-      .sort((a, b) => b.total - a.total);
+          // 以新總分做排序＋同分同名次（1,1,3,4 …）
+          const baseRows = [...TEAMS_DATA.filter(t => t.gender === gender)] as AnyTeam[];
+          const sorted = baseRows
+            .map(t => ({ team: t, total: getTotalScore(t) }))
+            .sort((a, b) => b.total - a.total);
 
-    let prevVal: number | null = null;
-    let visualRank = 0;
-    let place = 0;
-    const rows = sorted.map(r => {
-      place += 1;
-      if (prevVal === null || r.total !== prevVal) {
-        visualRank = place;
-        prevVal = r.total;
-      }
-      return { ...r, rank: visualRank };
-    });
+          let prevVal: number | null = null;
+          let visualRank = 0;
+          let place = 0;
+          const rows = sorted.map(r => {
+            place += 1;
+            if (prevVal === null || r.total !== prevVal) {
+              visualRank = place;
+              prevVal = r.total;
+            }
+            return { ...r, rank: visualRank };
+          });
 
-    return (
-      <table className="min-w-[1000px] md:min-w-[1100px] lg:min-w-[1200px]">
-        <thead className="bg-slate-700/50">
-          <tr>
-            <th className="px-6 py-3 text-left text-xs font-medium text-slate-300 uppercase tracking-wider whitespace-nowrap">
-              排名
-            </th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-slate-300 uppercase tracking-wider whitespace-nowrap">
-              組別／成員
-            </th>
+          return (
+            <table className="min-w-[1000px] md:min-w-[1100px] lg:min-w-[1200px]">
+              <thead className="bg-slate-700/50">
+                <tr>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-slate-300 uppercase tracking-wider whitespace-nowrap">
+                    排名
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-slate-300 uppercase tracking-wider whitespace-nowrap">
+                    組別／成員
+                  </th>
 
-            {/* W1 ~ W8 */}
-            {weekKeys.map((wk) => (
-              <th
-                key={wk}
-                className="px-3 py-3 text-center text-xs font-medium text-slate-300 uppercase tracking-wider whitespace-nowrap"
-              >
-                {wk.toUpperCase()}
-              </th>
-            ))}
-
-            {/* 💪 打卡總和 */}
-            <th className="px-3 py-3 text-center text-xs font-medium text-slate-300 uppercase tracking-wider whitespace-nowrap">
-              💪
-            </th>
-
-            {/* 驚喜任務 */}
-            <th className="px-3 py-3 text-center text-xs font-medium text-slate-300 uppercase tracking-wider whitespace-nowrap">
-              驚喜任務
-            </th>
-
-            {/* 當前積分（i 說明保留原本樣式） */}
-            <th className="px-6 py-3 text-right text-xs font-medium text-slate-300 uppercase tracking-wider whitespace-nowrap">
-              <span className="align-middle">當前積分</span>
-              <span className="relative inline-block ml-2 align-middle">
-                <button
-                  type="button"
-                  onClick={() => setShowScoreTip(v => !v)}
-                  onBlur={() => setShowScoreTip(false)}
-                  className="align-middle inline-flex items-center justify-center w-4 h-4 rounded-full bg-slate-700 text-slate-200 text-[10px] font-bold"
-                  aria-label="顯示說明"
-                  aria-expanded={showScoreTip}
-                >
-                  i
-                </button>
-                {showScoreTip && (
-                  <div className="absolute right-0 mt-2 w-72 text-left whitespace-normal bg-slate-900 text-slate-100 text-xs px-3 py-2 rounded-md shadow-lg ring-1 ring-slate-700 z-50">
-                    團隊總分 = 兩人的增肌減脂分數加總 × 60% ＋ 兩人的（運動打卡 + 驚喜任務）加總 × 40%
-                  </div>
-                )}
-              </span>
-            </th>
-          </tr>
-        </thead>
-
-        <tbody className="bg-slate-800 divide-y divide-slate-700">
-          {rows.map(({ team, rank, total }) => {
-            const workoutSum = getWorkoutSum(team as AnyTeam);
-            const surprise = (team as AnyTeam).surprise ?? 0;
-
-            return (
-              <tr key={team.id} className={rank <= 3 ? 'bg-slate-700/30' : ''}>
-                {/* 排名 */}
-                <td className="px-6 py-4 whitespace-nowrap text-lg font-bold">
-                  {/* 若你有獎盃圖示函式，可在這裡補上 */}
-                  <span className="hidden sm:inline">{rank}</span>
-                </td>
-
-                {/* 組別／成員（合併） */}
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="flex items-center gap-2">
-                    <span className="bg-slate-600 text-white text-xs font-bold px-[6px] py-[2px] rounded-md inline-block">
-                      #{team.id}
-                    </span>
-                    <span className="text-white font-medium">{team.name ?? `#${team.id}`}</span>
-                  </div>
-                  <div className="text-slate-300 text-sm mt-1">
-                    {team.members.join(' & ')}
-                  </div>
-                </td>
-
-                {/* W1~W8 逐欄 */}
-                {weekKeys.map((wk) => {
-                  const v = getWeek(team as AnyTeam, wk);
-                  return (
-                    <td
+                  {/* W1 ~ W8 */}
+                  {weekKeys.map((wk) => (
+                    <th
                       key={wk}
-                      className="px-3 py-4 text-center whitespace-nowrap text-white"
+                      className="px-3 py-3 text-center text-xs font-medium text-slate-300 uppercase tracking-wider whitespace-nowrap"
                     >
-                      {v ? `+${v}` : '–'}
-                    </td>
+                      {wk.toUpperCase()}
+                    </th>
+                  ))}
+
+                  {/* 💪 打卡總和 */}
+                  <th className="px-3 py-3 text-center text-xs font-medium text-slate-300 uppercase tracking-wider whitespace-nowrap">
+                    💪
+                  </th>
+
+                  {/* 驚喜任務 */}
+                  <th className="px-3 py-3 text-center text-xs font-medium text-slate-300 uppercase tracking-wider whitespace-nowrap">
+                    驚喜任務
+                  </th>
+
+                  {/* 當前積分（i 說明保留原本樣式） */}
+                  <th className="px-6 py-3 text-right text-xs font-medium text-slate-300 uppercase tracking-wider whitespace-nowrap">
+                    <span className="align-middle">當前積分</span>
+                    <span className="relative inline-block ml-2 align-middle">
+                      <button
+                        type="button"
+                        onClick={() => setShowScoreTip(v => !v)}
+                        onBlur={() => setShowScoreTip(false)}
+                        className="align-middle inline-flex items-center justify-center w-4 h-4 rounded-full bg-slate-700 text-slate-200 text-[10px] font-bold"
+                        aria-label="顯示說明"
+                        aria-expanded={showScoreTip}
+                      >
+                        i
+                      </button>
+                      {showScoreTip && (
+                        <div className="absolute right-0 mt-2 w-72 text-left whitespace-normal bg-slate-900 text-slate-100 text-xs px-3 py-2 rounded-md shadow-lg ring-1 ring-slate-700 z-50">
+                          團隊總分 = 兩人的增肌減脂分數加總 × 60% ＋ 兩人的（運動打卡 + 驚喜任務）加總 × 40%
+                        </div>
+                      )}
+                    </span>
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody className="bg-slate-800 divide-y divide-slate-700">
+                {rows.map(({ team, rank, total }) => {
+                  const workoutSum = getWorkoutSum(team as AnyTeam);
+                  const surprise = (team as AnyTeam).surprise ?? 0;
+
+                  return (
+                    <tr key={team.id} className={rank <= 3 ? 'bg-slate-700/30' : ''}>
+                      {/* 排名 */}
+                      <td className="px-6 py-4 whitespace-nowrap text-lg font-bold">
+                        {/* 若你有獎盃圖示函式，可在這裡補上 */}
+                        <span className="hidden sm:inline">{rank}</span>
+                      </td>
+
+                      {/* 組別／成員（合併） */}
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="flex items-center gap-2">
+                          <span className="bg-slate-600 text-white text-xs font-bold px-[6px] py-[2px] rounded-md inline-block">
+                            #{team.id}
+                          </span>
+                          <span className="text-white font-medium">{team.name ?? `#${team.id}`}</span>
+                        </div>
+                        <div className="text-slate-300 text-sm mt-1">
+                          {team.members.join(' & ')}
+                        </div>
+                      </td>
+
+                      {/* W1~W8 逐欄 */}
+                      {weekKeys.map((wk) => {
+                        const v = getWeek(team as AnyTeam, wk);
+                        return (
+                          <td
+                            key={wk}
+                            className="px-3 py-4 text-center whitespace-nowrap text-white"
+                          >
+                            {v ? `+${v}` : '–'}
+                          </td>
+                        );
+                      })}
+
+                      {/* 💪 打卡總和 */}
+                      <td className="px-3 py-4 text-center whitespace-nowrap text-white">
+                        {workoutSum ? `+${workoutSum}` : '+0'}
+                      </td>
+
+                      {/* 驚喜任務 */}
+                      <td className="px-3 py-4 text-center whitespace-nowrap text-white">
+                        {surprise ? `+${surprise}` : '+0'}
+                      </td>
+
+                      {/* 當前積分（依公式） */}
+                      <td className="px-6 py-4 whitespace-nowrap text-right text-lg font-bold">
+                        <span className="bg-gradient-to-r from-[#92FFFE] to-[#C4FF77] text-transparent bg-clip-text">
+                          {fmt1(total)}
+                        </span>
+                      </td>
+                    </tr>
                   );
                 })}
-
-                {/* 💪 打卡總和 */}
-                <td className="px-3 py-4 text-center whitespace-nowrap text-white">
-                  {workoutSum ? `+${workoutSum}` : '+0'}
-                </td>
-
-                {/* 驚喜任務 */}
-                <td className="px-3 py-4 text-center whitespace-nowrap text-white">
-                  {surprise ? `+${surprise}` : '+0'}
-                </td>
-
-                {/* 當前積分（依公式） */}
-                <td className="px-6 py-4 whitespace-nowrap text-right text-lg font-bold">
-                  <span className="bg-gradient-to-r from-[#92FFFE] to-[#C4FF77] text-transparent bg-clip-text">
-                    {fmt1(total)}
-                  </span>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-    );
-  })()}
-</div>
-{/* ====== 只改 table 區塊：到這裡結束 ====== */}
+              </tbody>
+            </table>
+          );
+        })()}
+      </div>
+      {/* ====== 只改 table 區塊：到這裡結束 ====== */}
 
 
         <p className="text-center text-slate-400 mt-4 text-sm">
           提醒：每週需確實完成3次運動打卡，並上傳認證照至雲端，審核通過才會認列積分。
         </p>
-      </section>
+
 
       {/* Upload Photo Section */}
       <section className="bg-slate-800 rounded-lg p-8">
