@@ -19,22 +19,26 @@ const RankingPage: React.FC = () => {
   const [gender, setGender] = useState<'male' | 'female'>('male');
   // 當前積分表頭的小 i tooltip
   const [showScoreTip, setShowScoreTip] = useState(false);
+  // 計算總分（包含驚喜任務）
+  const getTotal = (t: Team) => (t.points ?? 0) + ((t as any).surprise ?? 0);
+
 
   // 篩選 + 依分數排序
   const filteredTeams = TEAMS_DATA
-    .filter((team) => team.gender === gender)
-    .sort((a, b) => b.points - a.points);
+  .filter((team) => team.gender === gender)
+  .sort((a, b) => getTotal(b) - getTotal(a));
+
 
   // 同分同名次 (standard competition ranking: 1,1,3,4…)
-  const withRanks: Array<{ team: Team; rank: number }> = filteredTeams.reduce(
-    (acc, team, i) => {
+   const withRanks = filteredTeams.reduce(
+    (acc: Array<{ team: Team; rank: number }>, team, i) => {
       const prev = acc[i - 1];
       const rank =
-        i > 0 && prev && team.points === prev.team.points ? prev.rank : i + 1;
+        i > 0 && prev && getTotal(team) === getTotal(prev.team) ? prev.rank : i + 1;
       acc.push({ team, rank });
       return acc;
     },
-    [] as Array<{ team: Team; rank: number }>
+    []
   );
 
   // 前三名總數（>5 就全部不顯示獎盃/獎牌）
@@ -112,6 +116,15 @@ const RankingPage: React.FC = () => {
                     <span className="sm:hidden">每週<br />運動打卡</span>
                   </th>
 
+                  <th className="px-6 py-3 text-center text-xs font-medium text-slate-300 uppercase tracking-wider whitespace-normal leading-snug">
+                    {/* 桌機顯示一行 */}
+                    <span className="hidden sm:inline">驚喜任務</span>
+                    {/* 手機顯示兩行 */}
+                    <span className="sm:hidden">
+                      驚喜<br />任務
+                    </span>
+                  </th>
+
                   <th className="relative px-6 py-3 text-right text-xs font-medium text-slate-300 uppercase tracking-wider">
                     {/* 同行顯示 */}
                     <div className="flex items-center justify-end gap-1 whitespace-nowrap">
@@ -132,7 +145,7 @@ const RankingPage: React.FC = () => {
                     {/* tooltip：相對於 th 定位 */}
                     {showScoreTip && (
                       <div className="absolute right-0 mt-2 w-72 text-left whitespace-normal bg-slate-900 text-slate-100 text-xs px-3 py-2 rounded-md shadow-lg ring-1 ring-slate-700 z-50">
-                        團隊總分 = 兩人的增肌減脂分數加總後 × 60% + 兩人的運動打卡加總 × 40%
+                        團隊總分 = 兩人的增肌減脂分數加總後 × 60% + 兩人的團隊打卡加總 × 40%
                       </div>
                     )}
                   </th>
@@ -175,9 +188,15 @@ const RankingPage: React.FC = () => {
                       +{team.exercise ?? 0}
                     </td>
 
+                    {/*驚喜任務欄*/}
+                    <td className="px-6 py-4 whitespace-nowrap text-white text-center">
+                      +{(team as any).surprise ?? 0}
+                    </td>
+
+
                     {/* 當前積分欄（漸層字） */}
                     <td className="px-6 py-4 whitespace-nowrap text-right text-lg font-bold">
-                      <span className={gradientText}>{team.points}</span>
+                      <span className={gradientText}>{getTotal(team)}</span>
                     </td>
                   </tr>
                 ))}
