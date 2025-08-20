@@ -287,7 +287,7 @@ const RankingPage: React.FC = () => {
         </div>
       </section>
 
-    </div>
+
   );
 };
 
