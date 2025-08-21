@@ -101,12 +101,32 @@ const RankingPage: React.FC = () => {
                   <th className="px-6 py-3 text-left text-xs font-medium text-slate-300 uppercase tracking-wider">
                     排名
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-slate-300 uppercase tracking-wider">
+                  {/*<th className="px-6 py-3 text-left text-xs font-medium text-slate-300 uppercase tracking-wider">
                     組別
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-slate-300 uppercase tracking-wider">
                     成員
-                  </th>
+                  </th>*/}
+                  {/* 組別（含成員） */}
+                  <td className="px-6 py-4 text-white">
+                    <div className="flex items-center gap-2">
+                      <span className="bg-slate-600 text-white text-xs font-bold px-[6px] py-[2px] rounded-md">
+                        #{team.id}
+                      </span>
+                      <span className="font-medium">{team.name}</span>
+                    </div>
+                    <div className="text-slate-300 text-sm mt-1">
+                      {team.members.map((m, i) => (
+                        <span key={i}>
+                          {m}
+                          {i < team.members.length - 1 && (
+                            <span className="text-slate-500"> &nbsp;&amp;&nbsp; </span>
+                          )}
+                        </span>
+                      ))}
+                    </div>
+                  </td>
+
                   <th className="px-6 py-3 text-center text-xs font-medium text-slate-300 uppercase tracking-wider">
                     每週運動打卡
                   </th>
