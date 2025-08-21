@@ -14,7 +14,7 @@ const getTrophyIcon = (rank: number) => {
 
 const gradientText = 'bg-gradient-to-r from-[#92FFFE] to-[#C4FF77] text-transparent bg-clip-text';
 
-/** 當前積分：兩人的增肌減脂分數加總 × 60% ＋ 兩人的（運動打卡 + 驚喜任務）加總 × 40% */
+/** 當前積分：兩人的增肌減脂分數加總 × 60% ＋ 兩人的團隊打卡分數加總 × 40% */
 const getTotal = (t: Team): number => {
   // points = 兩人的增肌減脂分數加總（你的資料已是兩人加總）
   const body = (t.points ?? 0) * 0.6;
@@ -61,7 +61,7 @@ const RankingPage: React.FC = () => {
         <p className="mt-3 max-w-2xl mx-auto text-lg text-slate-300">
           每週五前將結算前一週的運動打卡分數，並且更新到賽況。
         </p>
-        <p className="mt-3 max-w-2xl mx-auto text-lg text-slate-300">最近更新：2025/08/12</p>
+        <p className="mt-3 max-w-2xl mx-auto text-lg text-slate-300">網站更新中，目前分數都是錯的，請先忽略！！！</p>
       </section>
 
       {/* ====== 男女子組頁籤（保持你原本樣式） ====== */}
@@ -99,7 +99,7 @@ const RankingPage: React.FC = () => {
               <thead className="bg-slate-700/50">
                 <tr>
                   <th className="px-6 py-3 text-left text-xs font-medium text-slate-300 uppercase tracking-wider">
-                    排名（賽前請先忽略）
+                    排名
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-slate-300 uppercase tracking-wider">
                     組別
@@ -128,7 +128,7 @@ const RankingPage: React.FC = () => {
                       </button>
                       {showScoreTip && (
                         <div className="absolute right-0 mt-2 w-72 text-left whitespace-normal bg-slate-900 text-slate-100 text-xs px-3 py-2 rounded-md shadow-lg ring-1 ring-slate-700 z-50">
-                          團隊總分 = 兩人的增肌減脂分數加總 × 60% + 兩人的（運動打卡 + 驚喜任務）加總 × 40%
+                          團隊總分 = 兩人的增肌減脂分數加總 × 60% + 兩人的團隊打卡分數加總 × 40%
                         </div>
                       )}
                     </span>
