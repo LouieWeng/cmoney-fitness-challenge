@@ -17,60 +17,66 @@ const gradientText =
 
 const WEEK_COUNT = 8;
 
-/** 取回 W1~W8 週分數（支援 weekly / weeks / exerciseWeeks / 個別 w1~w8；缺值以 0 補） */
-const getWeeklyScores = (t: Team): number[] => {
-  const anyT = t as any;
-  let arr: number[] | undefined = anyT.weekly || anyT.weeks || anyT.exerciseWeeks;
-
-  if (!Array.isArray(arr)) {
-    const keys = ['w1','w2','w3','w4','w5','w6','w7','w8'];
-    if (keys.some(k => typeof anyT[k] !== 'undefined')) {
-      arr = keys.map(k => Number(anyT[k] ?? 0));
-    }
-  }
-  if (!Array.isArray(arr)) arr = new Array(WEEK_COUNT).fill(0);
-  return Array.from({ length: WEEK_COUNT }, (_, i) => Number(arr![i] ?? 0));
-};
-
-/** 額外欄位設定：在 W2 與 W8 後各插入一欄 */
+/** 額外欄位：在 W2 與 W8 後各插入一欄 */
 type ExtraCol = { afterWeek: number; key: string; header: React.ReactNode };
 const EXTRA_COLS: ExtraCol[] = [
   { afterWeek: 2, key: 'bonusW2', header: <span role="img" aria-label="bonus2">🎁</span> },
   { afterWeek: 8, key: 'bonusW8', header: <span role="img" aria-label="bonus8">💪</span> },
 ];
 
-/** 讀取額外欄位的值（沒有或非法就 0） */
-const getExtraValue = (t: Team, key: string): number => {
-  const v = (t as any)?.[key];
-  const n = Number(v);
-  return Number.isFinite(n) ? n : 0;
+/** 「未填 / 特殊值」判斷：缺席、null、-1、或字串 "-" 視為待填 */
+const isPending = (v: unknown) =>
+  v === undefined ||
+  v === null ||
+  v === -1 ||
+  (typeof v === 'string' && v.trim() === '-');
+
+/** 取回 W1~W8 的「原始值」（保留待填狀態） */
+const getWeeklyRaw = (t: Team): unknown[] => {
+  const anyT = t as any;
+  let arr: unknown[] | undefined = anyT.weekly || anyT.weeks || anyT.exerciseWeeks;
+  if (!Array.isArray(arr)) {
+    const keys = ['w1','w2','w3','w4','w5','w6','w7','w8'];
+    if (keys.some(k => k in anyT)) arr = keys.map(k => anyT[k]);
+  }
+  return Array.from({ length: WEEK_COUNT }, (_, i) => (arr ? arr[i] : undefined));
 };
 
-const sum = (xs: number[]) => xs.reduce((s, v) => s + (Number(v) || 0), 0);
+/** 顯示：若待填顯示灰色 "—"，否則顯示 +數字 */
+const renderCell = (v: unknown) =>
+  isPending(v)
+    ? <span className="text-slate-500">—</span>
+    : <>+{Number(v) || 0}</>;
+
+/** 轉數字：待填視為 0 */
+const toNum = (v: unknown) => (isPending(v) ? 0 : Number(v) || 0);
+
+/** 額外欄位原始值／數值 */
+const getExtraRaw = (t: Team, key: string): unknown => (t as any)[key];
+const getExtraNum = (t: Team, key: string): number => toNum(getExtraRaw(t, key));
 
 /** 新公式：
- * 當前積分 = (W1~W8 + bonusW2) 的總和 × 0.4 + (bonusW8) × 0.6
+ * 當前積分 = (W1~W8 + bonusW2) 的總和 × 0.4 ＋ (bonusW8) × 0.6
+ * （待填值不計入＝當作 0）
  */
 const calcTotal = (t: Team): number => {
-  const weeklySum = sum(getWeeklyScores(t));
-  const bonus2 = getExtraValue(t, 'bonusW2');
-  const bonus8 = getExtraValue(t, 'bonusW8');
+  const weeklySum = getWeeklyRaw(t).reduce((s, v) => s + toNum(v), 0);
+  const bonus2 = getExtraNum(t, 'bonusW2');
+  const bonus8 = getExtraNum(t, 'bonusW8');
   return (weeklySum + bonus2) * 0.4 + bonus8 * 0.6;
 };
 
-/** 顯示 1 位小數，避免浮點殘差 */
+/** 四捨五入到 1 位小數 */
 const format1 = (n: number) => (Math.round(n * 10) / 10).toFixed(1);
 
 const RankingPage: React.FC = () => {
   const [gender, setGender] = useState<'male' | 'female'>('male');
   const [showScoreTip, setShowScoreTip] = useState(false);
 
-  /** 過濾/排序（用總分排序） */
   const filteredTeams = TEAMS_DATA
     .filter((team) => team.gender === gender)
     .sort((a, b) => calcTotal(b) - calcTotal(a));
 
-  /** 同分同名次（1,1,3…），用「總分」判斷是否同分 */
   const withRanks = filteredTeams.reduce(
     (acc: Array<{ team: Team; rank: number }>, team, i) => {
       const prev = acc[i - 1];
@@ -82,12 +88,11 @@ const RankingPage: React.FC = () => {
     []
   );
 
-  /** 計算前 3 名總數（>5 就不顯示獎盃/獎牌） */
   const top3Count = withRanks.filter((r) => r.rank <= 3).length;
 
   return (
     <div className="space-y-12">
-      {/* ====== 頁面標題 ====== */}
+      {/* ====== 標題 ====== */}
       <section className="text-center">
         <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white">
           快來關注 <span className={gradientText}>每週賽況</span>
@@ -118,7 +123,7 @@ const RankingPage: React.FC = () => {
           </button>
           <button
             onClick={() => setGender('female')}
-            className={`relative z-10 px-6 py-2 text-center font-bold rounded-full min-w-[96px] transition ${
+            className={`relative z-10 px-6 py-2 text-center font-bold rounded.full min-w-[96px] transition ${
               gender === 'female' ? 'text-slate-900' : 'text-white'
             }`}
           >
@@ -137,7 +142,6 @@ const RankingPage: React.FC = () => {
                   <th className="px-6 py-3 text-left text-xs font-medium text-slate-300 uppercase tracking-wider">
                     排名
                   </th>
-
                   <th className="px-6 py-3 text-left text-xs font-medium text-slate-300 uppercase tracking-wider">
                     組別 / 成員
                   </th>
@@ -152,7 +156,6 @@ const RankingPage: React.FC = () => {
                         <th
                           key={`h-extra-${ec.key}`}
                           className="px-3 py-3 text-center text-xs font-medium text-slate-300 uppercase tracking-wider"
-                          title={typeof ec.header === 'string' ? ec.header : undefined}
                         >
                           {ec.header}
                         </th>
@@ -175,7 +178,7 @@ const RankingPage: React.FC = () => {
                       </button>
                       {showScoreTip && (
                         <div className="absolute right-0 mt-2 w-80 text-left whitespace-normal bg-slate-900 text-slate-100 text-xs px-3 py-2 rounded-md shadow-lg ring-1 ring-slate-700 z-50">
-                          當前積分 = (W1~W8 加上 🎁 欄位) 的總和 × 40% ＋ (💪 欄位) × 60%
+                          當前積分 = (W1~W8 + 🎁) 的總和 × 40% ＋ (💪) × 60%（灰色「—」不計分）
                         </div>
                       )}
                     </span>
@@ -185,7 +188,7 @@ const RankingPage: React.FC = () => {
 
               <tbody className="bg-slate-800 divide-y divide-slate-700">
                 {withRanks.map(({ team, rank }) => {
-                  const weekly = getWeeklyScores(team);
+                  const weeklyRaw = getWeeklyRaw(team);
                   return (
                     <tr key={team.id} className={rank <= 3 ? 'bg-slate-700/30' : ''}>
                       {/* 排名 */}
@@ -214,24 +217,22 @@ const RankingPage: React.FC = () => {
                         </div>
                       </td>
 
-                      {/* W1~W8 + 兩個額外欄位 */}
-                      {weekly.map((w, idx) => {
+                      {/* W1~W8 + 兩個額外欄位（帶灰色「—」顯示） */}
+                      {weeklyRaw.map((raw, idx) => {
                         const wk = idx + 1;
                         return (
                           <React.Fragment key={`${team.id}-w${wk}`}>
                             <td className="px-4 py-4 whitespace-nowrap text-white text-center">
-                              {`+${w ?? 0}`}
+                              {renderCell(raw)}
                             </td>
-
-                            {/* 插入在 W2、W8 後的資料欄 */}
                             {EXTRA_COLS.filter(ec => ec.afterWeek === wk).map((ec) => {
-                              const val = getExtraValue(team, ec.key);
+                              const rawExtra = getExtraRaw(team, ec.key);
                               return (
                                 <td
                                   key={`${team.id}-extra-${ec.key}`}
                                   className="px-3 py-4 whitespace-nowrap text-white text-center"
                                 >
-                                  {`+${val}`}
+                                  {renderCell(rawExtra)}
                                 </td>
                               );
                             })}
@@ -239,7 +240,7 @@ const RankingPage: React.FC = () => {
                         );
                       })}
 
-                      {/* 當前積分（新公式），顯示 1 位小數 */}
+                      {/* 當前積分（新公式） */}
                       <td className="px-6 py-4 whitespace-nowrap text-right text-lg font-bold">
                         <span className={gradientText}>{format1(calcTotal(team))}</span>
                       </td>
@@ -260,4 +261,5 @@ const RankingPage: React.FC = () => {
 };
 
 export default RankingPage;
+
 
