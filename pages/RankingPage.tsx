@@ -178,7 +178,7 @@ const RankingPage: React.FC = () => {
                       </button>
                       {showScoreTip && (
                         <div className="absolute right-0 mt-2 w-80 text-left whitespace-normal bg-slate-900 text-slate-100 text-xs px-3 py-2 rounded-md shadow-lg ring-1 ring-slate-700 z-50">
-                          當前積分 = (W1~W8 + 🎁) 的總和 × 40% ＋ (💪) × 60%（灰色「—」不計分）
+                          當前積分 = (W1~W8運動打卡 + 🎁驚喜任務) 的總和 × 40% ＋ (💪增肌減脂分數) × 60%
                         </div>
                       )}
                     </span>
