@@ -5,7 +5,7 @@ export const GOOGLE_DRIVE_URL = 'https://drive.google.com/drive/folders/example'
 
 export const TEAMS_DATA: Team[] = [
   // 1) 推薦：陣列 weekly / weeks / exerciseWeeks（長度 8）
-  { id: 1, name: '鍶去的脂肪庭止再生', gender: 'female', points: 0.0, members: ['陳郁庭', '許瀞鍶'], weekly: [1,2], bonusW2: 4, bonusW8: 0,}
+  { id: 1, name: '鍶去的脂肪庭止再生', gender: 'female', points: 0.0, members: ['陳郁庭', '許瀞鍶'], weekly: [1,2], bonusW2: 4, bonusW8: -1,}
   // { id: 1, gender: 'female', name: '鍶去的脂肪庭止再生', members: ['陳郁庭', '許瀞鍶'], exercise: 1, points: 0.4 },
   // { id: 2, gender: 'female', name: '斯巴達增肌減脂戰士', members: ['謝家芸', '翁憶如'], exercise: 2, points: 0.8 },
   // { id: 3, gender: 'female', name: '聿罷不寧', members: ['彭聿采', '許家寧'], exercise: 2, points: 0.8 },
