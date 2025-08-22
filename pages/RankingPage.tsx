@@ -20,8 +20,8 @@ const WEEK_COUNT = 8;
 /** 額外欄位：在 W2 與 W8 後各插入一欄 */
 type ExtraCol = { afterWeek: number; key: string; header: React.ReactNode };
 const EXTRA_COLS: ExtraCol[] = [
-  { afterWeek: 2, key: 'bonusW2', header: <span role="img" aria-label="bonus2">🎁</span> },
-  { afterWeek: 8, key: 'bonusW8', header: <span role="img" aria-label="bonus8">💪</span> },
+  { afterWeek: 2, key: 'bonusW2', header: <span role="img" aria-label="bonus2">🎁今天吃健康點</span> },
+  { afterWeek: 8, key: 'bonusW8', header: <span role="img" aria-label="bonus8">💪增肌減脂分數</span> },
 ];
 
 /** 「未填 / 特殊值」判斷：缺席、null、-1、或字串 "-" 視為待填 */
@@ -101,7 +101,7 @@ const RankingPage: React.FC = () => {
           每週五前將結算前一週的運動打卡分數，並且更新到賽況。
         </p>
         <p className="mt-3 max-w-2xl mx-auto text-lg text-slate-300">
-          網站更新中，目前分數都是錯的，請先忽略！！！
+          最近更新：08/22
         </p>
       </section>
 
