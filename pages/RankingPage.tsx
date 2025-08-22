@@ -20,8 +20,7 @@ const WEEK_COUNT = 8;
 /** 取回 W1~W8 週分數（支援 weekly / weeks / exerciseWeeks / 個別 w1~w8；缺值以 0 補） */
 const getWeeklyScores = (t: Team): number[] => {
   const anyT = t as any;
-  let arr: number[] | undefined =
-    anyT.weekly || anyT.weeks || anyT.exerciseWeeks;
+  let arr: number[] | undefined = anyT.weekly || anyT.weeks || anyT.exerciseWeeks;
 
   if (!Array.isArray(arr)) {
     const keys = ['w1','w2','w3','w4','w5','w6','w7','w8'];
@@ -40,25 +39,24 @@ const EXTRA_COLS: ExtraCol[] = [
   { afterWeek: 8, key: 'bonusW8', header: <span role="img" aria-label="bonus8">💪</span> },
 ];
 
-/** 取得額外欄位的值（未提供則回傳 undefined） */
-const getExtraValue = (t: Team, key: string): number | undefined => {
+/** 讀取額外欄位的值（沒有則 0） */
+const getExtraValue = (t: Team, key: string): number => {
   const v = (t as any)?.[key];
-  if (v === null || typeof v === 'undefined') return undefined;
   const n = Number(v);
-  return Number.isFinite(n) ? n : undefined;
+  return Number.isFinite(n) ? n : 0;
 };
 
-/** 當前積分：兩人的增肌減脂分數加總 × 60% ＋ 兩人的團隊打卡分數加總 × 40% */
-const getTotal = (t: Team): number => {
-  const body = (t.points ?? 0) * 0.6;
+const sum = (xs: number[]) => xs.reduce((s, v) => s + (Number(v) || 0), 0);
 
-  // 只用 W1~W8 加總計入 40%（額外欄位不納入計算）
-  const weekly = getWeeklyScores(t);
-  const exerciseSum = weekly.reduce((s, v) => s + (Number(v) || 0), 0);
-  const sport = exerciseSum * 0.4;
-
-  return body + sport;
+/** 新計算：所有分數（W1~W8 ＋ 兩個額外欄位）加總 × 0.4 */
+const calcTotal = (t: Team): number => {
+  const weeklySum = sum(getWeeklyScores(t));
+  const extrasSum = EXTRA_COLS.reduce((s, ec) => s + getExtraValue(t, ec.key), 0);
+  return (weeklySum + extrasSum) * 0.4;
 };
+
+/** 顯示格式：四捨五入到 1 位小數，避免浮點殘差 */
+const format1 = (n: number) => (Math.round(n * 10) / 10).toFixed(1);
 
 const RankingPage: React.FC = () => {
   const [gender, setGender] = useState<'male' | 'female'>('male');
@@ -66,13 +64,13 @@ const RankingPage: React.FC = () => {
 
   const filteredTeams = TEAMS_DATA
     .filter((team) => team.gender === gender)
-    .sort((a, b) => getTotal(b) - getTotal(a));
+    .sort((a, b) => calcTotal(b) - calcTotal(a));
 
   const withRanks = filteredTeams.reduce(
     (acc: Array<{ team: Team; rank: number }>, team, i) => {
       const prev = acc[i - 1];
       const rank =
-        i > 0 && prev && getTotal(team) === getTotal(prev.team) ? prev.rank : i + 1;
+        i > 0 && prev && calcTotal(team) === calcTotal(prev.team) ? prev.rank : i + 1;
       acc.push({ team, rank });
       return acc;
     },
@@ -171,7 +169,7 @@ const RankingPage: React.FC = () => {
                       </button>
                       {showScoreTip && (
                         <div className="absolute right-0 mt-2 w-72 text-left whitespace-normal bg-slate-900 text-slate-100 text-xs px-3 py-2 rounded-md shadow-lg ring-1 ring-slate-700 z-50">
-                          團隊總分 = 兩人的增肌減脂分數加總 × 60% + 兩人的團隊打卡分數加總 × 40%
+                          當前積分 = (W1~W8 + 兩個額外欄位) 的總和 × 40%
                         </div>
                       )}
                     </span>
@@ -235,9 +233,9 @@ const RankingPage: React.FC = () => {
                         );
                       })}
 
-                      {/* 當前積分 */}
+                      {/* 當前積分（新公式 × 0.4，顯示 1 位小數） */}
                       <td className="px-6 py-4 whitespace-nowrap text-right text-lg font-bold">
-                        <span className={gradientText}>{getTotal(team)}</span>
+                        <span className={gradientText}>{format1(calcTotal(team))}</span>
                       </td>
                     </tr>
                   );
@@ -256,4 +254,3 @@ const RankingPage: React.FC = () => {
 };
 
 export default RankingPage;
-
