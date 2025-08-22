@@ -39,7 +39,7 @@ const EXTRA_COLS: ExtraCol[] = [
   { afterWeek: 8, key: 'bonusW8', header: <span role="img" aria-label="bonus8">💪</span> },
 ];
 
-/** 讀取額外欄位的值（沒有則 0） */
+/** 讀取額外欄位的值（沒有或非法就 0） */
 const getExtraValue = (t: Team, key: string): number => {
   const v = (t as any)?.[key];
   const n = Number(v);
@@ -48,24 +48,29 @@ const getExtraValue = (t: Team, key: string): number => {
 
 const sum = (xs: number[]) => xs.reduce((s, v) => s + (Number(v) || 0), 0);
 
-/** 新計算：所有分數（W1~W8 ＋ 兩個額外欄位）加總 × 0.4 */
+/** 新公式：
+ * 當前積分 = (W1~W8 + bonusW2) 的總和 × 0.4 + (bonusW8) × 0.6
+ */
 const calcTotal = (t: Team): number => {
   const weeklySum = sum(getWeeklyScores(t));
-  const extrasSum = EXTRA_COLS.reduce((s, ec) => s + getExtraValue(t, ec.key), 0);
-  return (weeklySum + extrasSum) * 0.4;
+  const bonus2 = getExtraValue(t, 'bonusW2');
+  const bonus8 = getExtraValue(t, 'bonusW8');
+  return (weeklySum + bonus2) * 0.4 + bonus8 * 0.6;
 };
 
-/** 顯示格式：四捨五入到 1 位小數，避免浮點殘差 */
+/** 顯示 1 位小數，避免浮點殘差 */
 const format1 = (n: number) => (Math.round(n * 10) / 10).toFixed(1);
 
 const RankingPage: React.FC = () => {
   const [gender, setGender] = useState<'male' | 'female'>('male');
   const [showScoreTip, setShowScoreTip] = useState(false);
 
+  /** 過濾/排序（用總分排序） */
   const filteredTeams = TEAMS_DATA
     .filter((team) => team.gender === gender)
     .sort((a, b) => calcTotal(b) - calcTotal(a));
 
+  /** 同分同名次（1,1,3…），用「總分」判斷是否同分 */
   const withRanks = filteredTeams.reduce(
     (acc: Array<{ team: Team; rank: number }>, team, i) => {
       const prev = acc[i - 1];
@@ -77,6 +82,7 @@ const RankingPage: React.FC = () => {
     []
   );
 
+  /** 計算前 3 名總數（>5 就不顯示獎盃/獎牌） */
   const top3Count = withRanks.filter((r) => r.rank <= 3).length;
 
   return (
@@ -168,8 +174,8 @@ const RankingPage: React.FC = () => {
                         i
                       </button>
                       {showScoreTip && (
-                        <div className="absolute right-0 mt-2 w-72 text-left whitespace-normal bg-slate-900 text-slate-100 text-xs px-3 py-2 rounded-md shadow-lg ring-1 ring-slate-700 z-50">
-                          當前積分 = (W1~W8 + 兩個額外欄位) 的總和 × 40%
+                        <div className="absolute right-0 mt-2 w-80 text-left whitespace-normal bg-slate-900 text-slate-100 text-xs px-3 py-2 rounded-md shadow-lg ring-1 ring-slate-700 z-50">
+                          當前積分 = (W1~W8 加上 🎁 欄位) 的總和 × 40% ＋ (💪 欄位) × 60%
                         </div>
                       )}
                     </span>
@@ -225,7 +231,7 @@ const RankingPage: React.FC = () => {
                                   key={`${team.id}-extra-${ec.key}`}
                                   className="px-3 py-4 whitespace-nowrap text-white text-center"
                                 >
-                                  {typeof val === 'number' ? `+${val}` : '—'}
+                                  {`+${val}`}
                                 </td>
                               );
                             })}
@@ -233,7 +239,7 @@ const RankingPage: React.FC = () => {
                         );
                       })}
 
-                      {/* 當前積分（新公式 × 0.4，顯示 1 位小數） */}
+                      {/* 當前積分（新公式），顯示 1 位小數 */}
                       <td className="px-6 py-4 whitespace-nowrap text-right text-lg font-bold">
                         <span className={gradientText}>{format1(calcTotal(team))}</span>
                       </td>
@@ -254,3 +260,4 @@ const RankingPage: React.FC = () => {
 };
 
 export default RankingPage;
+
