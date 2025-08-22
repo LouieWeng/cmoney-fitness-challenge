@@ -198,7 +198,7 @@ const RankingPage: React.FC = () => {
                       </td>
 
                       {/* 組別 / 成員 */}
-                      <td className="px-6 py-4 text-white">
+                      {/*<td className="px-6 py-4 text-white">
                         <div className="flex items-center gap-2">
                           <span className="bg-slate-600 text-white text-xs font-bold px-[6px] py-[2px] rounded-md">
                             #{team.id}
@@ -215,7 +215,32 @@ const RankingPage: React.FC = () => {
                             </span>
                           ))}
                         </div>
+                      </td>*/}
+                      {/* 組別 / 成員：把 #id + 隊名合併在同一個框 */}
+                      <td className="px-6 py-4 text-white">
+                        <div className="flex items-center gap-2 min-w-0">
+                          <span
+                            className="inline-flex items-center gap-2 rounded-2xl bg-slate-600/80 px-3 py-1 text-white max-w-full"
+                            title={`#${team.id} ${team.name}`}
+                          >
+                            <span className="text-sm font-bold whitespace-nowrap">#{team.id}</span>
+                            <span className="text-sm sm:text-base font-semibold truncate">{team.name}</span>
+                          </span>
+                        </div>
+
+                        {/* 成員（維持原樣） */}
+                        <div className="text-slate-300 text-sm mt-1">
+                          {team.members.map((m, i) => (
+                            <span key={i}>
+                              {m}
+                              {i < team.members.length - 1 && (
+                                <span className="text-slate-500"> &nbsp;&amp;&nbsp; </span>
+                              )}
+                            </span>
+                          ))}
+                        </div>
                       </td>
+
 
                       {/* W1~W8 + 兩個額外欄位（帶灰色「—」顯示） */}
                       {weeklyRaw.map((raw, idx) => {
