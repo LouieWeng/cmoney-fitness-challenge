@@ -34,8 +34,8 @@ export const TEAMS_DATA: Team[] = [
   { id: 26, name: '有脂者事竟成', gender: 'male', points: 0.0, members: ['趙政建', '何品儒'], weekly: [2,2], bonusW2: 1, bonusW8: -1},
   { id: 27, name: '充肌冠軍', gender: 'male', points: 0.0, members: ['黃宏鈺', '李尚錡'], weekly: [1,2], bonusW2: 4, bonusW8: -1},
   { id: 28, name: '預測實現 年輕加倍', gender: 'male', points: 0.0, members: ['林慶文', '施孝承'], weekly: [2,2], bonusW2: 1, bonusW8: -1},
-  { id: 29, name: '體加薪1萬元', gender: 'male', points: 0.0, members: ['王庭翊', '廖晉楷'], weekly: [2,2], bonusW2: 4, bonusW8: -1},
-  { id: 30, name: '有創意的隊', gender: 'male', points: 0.0, members: ['曾王教昌', '陳俊凱'], weekly: [2,2], bonusW2: 4, bonusW8: -1}
+  { id: 29, name: '加薪1萬元', gender: 'male', points: 0.0, members: ['王庭翊', '廖晉楷'], weekly: [2,2], bonusW2: 4, bonusW8: -1},
+  { id: 30, name: '有創意的隊', gender: 'male', points: 0.0, members: ['王教昌', '陳俊凱'], weekly: [2,2], bonusW2: 4, bonusW8: -1}
 
 ];
 
