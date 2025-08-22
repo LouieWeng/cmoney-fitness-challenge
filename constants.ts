@@ -21,7 +21,6 @@ export const TEAMS_DATA: Team[] = [
   { id: 14, name: '平均70分', gender: 'female', points: 0.0, members: ['謝孟倢', '林紹芩'], weekly: [2,2], bonusW2: 4, bonusW8: -1}
   { id: 15, name: '麥菜小隊', gender: 'female', points: 0.0, members: ['蔡季諭', '李沁璇'], weekly: [2,2], bonusW2: 0, bonusW8: -1}
   { id: 31, name: '迭代瘦身王', gender: 'female', points: 0.0, members: ['林孟蓉', '陳婉渟'], weekly: [2,2], bonusW2: 4, bonusW8: -1}
-
   { id: 16, name: '產品總監漢斯', gender: 'male', points: 0.0, members: ['謝承翰', '鄭靖達'], weekly: [2,2], bonusW2: 4, bonusW8: -1}
   { id: 17, name: '陳和歐巴', gender: 'male', points: 0.0, members: ['陳和', '李珣廷'], weekly: [2,2], bonusW2: 4, bonusW8: -1}
   { id: 18, name: '天欲我瘦胖不了', gender: 'male', points: 0.0, members: ['邱世煌', '郭錦偉'], weekly: [0,0], bonusW2: 2, bonusW8: -1}
@@ -31,7 +30,6 @@ export const TEAMS_DATA: Team[] = [
   { id: 22, name: '4000塊拿來', gender: 'male', points: 0.0, members: ['丁禹翔', '鄭昊'], weekly: [0,0], bonusW2: 0, bonusW8: -1}
   { id: 23, name: '免費測量inbody', gender: 'male', points: 0.0, members: ['劉亞樵', '林佑淳'], weekly: [2,1], bonusW2: 4, bonusW8: -1}
   { id: 24, name: '體重 Maximum', gender: 'male', points: 0.0, members: ['梁勝傑', '黃思睿'], weekly: [2,2], bonusW2: 2, bonusW8: -1}
-
   { id: 25, name: '每塊肉都有名字', gender: 'male', points: 0.0, members: ['蕭孟杰', '張家齊'], weekly: [2,2], bonusW2: 4, bonusW8: -1}
   { id: 26, name: '有脂者事竟成', gender: 'male', points: 0.0, members: ['趙政建', '何品儒'], weekly: [2,2], bonusW2: 1, bonusW8: -1}
   { id: 27, name: '充肌冠軍', gender: 'male', points: 0.0, members: ['黃宏鈺', '李尚錡'], weekly: [1,2], bonusW2: 4, bonusW8: -1}
