@@ -220,7 +220,7 @@ const RankingPage: React.FC = () => {
                       <td className="px-6 py-4 text-white">
                         <div className="flex items-center gap-2 min-w-0">
                           <span
-                            className="inline-flex items-center gap-2 rounded-2xl bg-slate-600/80 px-3 py-1 text-white max-w-full"
+                            className="inline-flex items-center gap-2 rounded-[8px] bg-slate-600/80 px-3 py-1 text-white max-w-full"
                             title={`#${team.id} ${team.name}`}
                           >
                             <span className="text-sm font-bold whitespace-nowrap">#{team.id}</span>
