@@ -192,30 +192,16 @@ const RankingPage: React.FC = () => {
                   return (
                     <tr key={team.id} className={rank <= 3 ? 'bg-slate-700/30' : ''}>
                       {/* 排名 */}
-                      <td className="px-6 py-4 whitespace-nowrap text-lg font-bold">
+                      {/*<td className="px-6 py-4 whitespace-nowrap text-lg font-bold">
                         {rank <= 3 && top3Count <= 5 ? getTrophyIcon(rank) : null}
                         <span className="hidden sm:inline">{rank}</span>
+                      </td>*/}
+                      <td className="px-6 py-4 whitespace-nowrap text-lg font-bold flex items-center gap-1">
+                        {rank <= 3 && top3Count <= 5 ? getTrophyIcon(rank) : null}
+                        <span>{rank}</span>
                       </td>
 
-                      {/* 組別 / 成員 */}
-                      {/*<td className="px-6 py-4 text-white">
-                        <div className="flex items-center gap-2">
-                          <span className="bg-slate-600 text-white text-xs font-bold px-[6px] py-[2px] rounded-md">
-                            #{team.id}
-                          </span>
-                          <span className="font-medium">{team.name}</span>
-                        </div>
-                        <div className="text-slate-300 text-sm mt-1">
-                          {team.members.map((m, i) => (
-                            <span key={i}>
-                              {m}
-                              {i < team.members.length - 1 && (
-                                <span className="text-slate-500"> &nbsp;&amp;&nbsp; </span>
-                              )}
-                            </span>
-                          ))}
-                        </div>
-                      </td>*/}
+                    
                       {/* 組別 / 成員：把 #id + 隊名合併在同一個框 */}
                       <td className="px-6 py-4 text-white">
                         <div className="flex items-center gap-2 min-w-0">
