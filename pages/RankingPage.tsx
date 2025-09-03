@@ -275,7 +275,7 @@ const RankingPage: React.FC = () => {
                 <h2 className="text-2xl font-bold text-white">看完排名忍不住想運動了嗎？快去運動打卡吧！</h2>
             </div>
             <div className="flex flex-col sm:flex-row gap-4 flex-shrink-0">
-                <a href={"https://drive.google.com/drive/u/0/folders/1d-JmO9mOgzwFn-2AMeuIUuh-IM_5qSrv"} target="_blank" rel="noopener noreferrer" className="inline-block bg-slate-700 text-white font-bold py-3 px-8 rounded-lg hover:bg-slate-600 transition-colors">
+                <a href={"https://drive.google.com/drive/u/0/folders/1d-JmO9mOgzwFn-2AMeuIUuh-IM_5qSrv"} target="_blank" rel="noopener noreferrer" className="inline-block bg-gradient-to-r from-[#92FFFE] to-[#C4FF77] text-slate-900 font-bold py-3 px-8 rounded-lg hover:brightness-110 transition-all">
                     上傳認證照
                 </a>
             </div>
