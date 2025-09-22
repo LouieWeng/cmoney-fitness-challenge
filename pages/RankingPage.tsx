@@ -17,11 +17,11 @@ const gradientText =
 
 const WEEK_COUNT = 8;
 
-/** 額外欄位：在 W2 與 W8 後各插入一欄 */
+/** 額外欄位：在 W2, W6 與 W8 後各插入一欄 */
 type ExtraCol = { afterWeek: number; key: string; header: React.ReactNode };
 const EXTRA_COLS: ExtraCol[] = [
   { afterWeek: 2, key: 'bonusW2', header: <span role="img" aria-label="bonus2">🎁健康餐</span> },
-  { afterWeek: 6, key: 'bonusW6', header: <span role="img" aria-label="bonus6">🎒整裝出發</span> },
+  { afterWeek: 6, key: 'bonusW6', header: <span role="img" aria-label="bonus6">🎁整裝出發</span> },
   { afterWeek: 8, key: 'bonusW8', header: <span role="img" aria-label="bonus8">💪增肌減脂</span> },
 ];
 
