@@ -21,6 +21,7 @@ const WEEK_COUNT = 8;
 type ExtraCol = { afterWeek: number; key: string; header: React.ReactNode };
 const EXTRA_COLS: ExtraCol[] = [
   { afterWeek: 2, key: 'bonusW2', header: <span role="img" aria-label="bonus2">🎁健康餐</span> },
+  { afterWeek: 6, key: 'bonusW6', header: <span role="img" aria-label="bonus6">🎒整裝出發</span> },
   { afterWeek: 8, key: 'bonusW8', header: <span role="img" aria-label="bonus8">💪增肌減脂</span> },
 ];
 
@@ -56,14 +57,15 @@ const getExtraRaw = (t: Team, key: string): unknown => (t as any)[key];
 const getExtraNum = (t: Team, key: string): number => toNum(getExtraRaw(t, key));
 
 /** 新公式：
- * 當前積分 = (W1~W8 + bonusW2) 的總和 × 0.4 ＋ (bonusW8) × 0.6
+ * 當前積分 = (W1~W8 + bonusW2 + bonusW6) 的總和 × 0.4 ＋ (bonusW8) × 0.6
  * （待填值不計入＝當作 0）
  */
 const calcTotal = (t: Team): number => {
   const weeklySum = getWeeklyRaw(t).reduce((s, v) => s + toNum(v), 0);
   const bonus2 = getExtraNum(t, 'bonusW2');
+  const bonus6 = getExtraNum(t, 'bonusW6');
   const bonus8 = getExtraNum(t, 'bonusW8');
-  return (weeklySum + bonus2) * 0.4 + bonus8 * 0.6;
+  return (weeklySum + bonus2 + bonus6) * 0.4 + bonus8 * 0.6;
 };
 
 /** 四捨五入到 1 位小數 */
