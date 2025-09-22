@@ -56,7 +56,6 @@ const toNum = (v: unknown) => (isPending(v) ? 0 : Number(v) || 0);
 
 /** 額外欄位原始值／數值 */
 const getExtraRaw = (t: Team, key: string): unknown => (t as any)[key];
-return anyT[key] ?? anyT[key.replace('bonusW', 'bonus')];
 const getExtraNum = (t: Team, key: string): number => toNum(getExtraRaw(t, key));
 
 /** 新公式：
