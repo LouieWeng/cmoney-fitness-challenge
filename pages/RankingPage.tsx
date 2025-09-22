@@ -1,3 +1,4 @@
+console.log('EXTRA_COLS at runtime →', EXTRA_COLS);
 console.log('EXTRA_COLS now = ', EXTRA_COLS);
 
 // pages/RankingPage.tsx
@@ -151,21 +152,27 @@ const RankingPage: React.FC = () => {
                   </th>
 
                   {/* W1~W8 ＋ 在 W2、W8 後插入額外欄位 */}
-                  {Array.from({ length: WEEK_COUNT }, (_, i) => i + 1).map((wk) => (
-                    <React.Fragment key={`h-w${wk}`}>
-                      <th className="px-4 py-3 text-center text-xs font-medium text-slate-300 uppercase tracking-wider">
-                        W{wk}
-                      </th>
-                      {EXTRA_COLS.filter(ec => ec.afterWeek === wk).map((ec) => (
-                        <th
-                          key={`h-extra-${ec.key}`}
-                          className="px-3 py-3 text-center text-xs font-medium text-slate-300 uppercase tracking-wider"
-                        >
-                          {ec.header}
+                  {Array.from({ length: WEEK_COUNT }, (_, i) => i + 1).map((wk) => {
+                    if (wk === 6) {
+                      console.log('wk=6 extras →', EXTRA_COLS.filter(ec => ec.afterWeek === 6));
+                    }
+                    return (
+                      <React.Fragment key={`h-w${wk}`}>
+                        <th className="px-4 py-3 text-center text-xs font-medium text-slate-300 uppercase tracking-wider">
+                          W{wk}
                         </th>
-                      ))}
-                    </React.Fragment>
-                  ))}
+                        {EXTRA_COLS.filter(ec => ec.afterWeek === wk).map((ec) => (
+                          <th
+                            key={`h-extra-${ec.key}`}
+                            className="px-3 py-3 text-center text-xs font-medium text-slate-300 uppercase tracking-wider"
+                          >
+                            {ec.header}
+                          </th>
+                        ))}
+                      </React.Fragment>
+                    );
+                  })}
+
 
                   <th className="px-6 py-3 text-right text-xs font-medium text-slate-300 uppercase tracking-wider">
                     <span className="align-middle">當前積分</span>
