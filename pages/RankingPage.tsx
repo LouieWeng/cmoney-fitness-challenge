@@ -1,8 +1,3 @@
-console.log('EXTRA_COLS at runtime →', EXTRA_COLS);
-console.log('EXTRA_COLS now = ', EXTRA_COLS);
-console.log('[RankingPage] build tag = 2025-09-22-19:30');
-
-
 // pages/RankingPage.tsx
 import React, { useState } from 'react';
 import { TEAMS_DATA } from '../constants';
@@ -155,7 +150,7 @@ const RankingPage: React.FC = () => {
 
                   {/* W1~W8 ＋ 在 W2、W8 後插入額外欄位 */}
                   {Array.from({ length: WEEK_COUNT }, (_, i) => i + 1).map((wk) => {
-                    if (wk === 6) {
+                    if (wk === 8) {
                       console.log('wk=6 extras →', EXTRA_COLS.filter(ec => ec.afterWeek === 6));
                     }
                     return (
