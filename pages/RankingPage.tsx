@@ -1,3 +1,5 @@
+console.log('EXTRA_COLS now = ', EXTRA_COLS);
+
 // pages/RankingPage.tsx
 import React, { useState } from 'react';
 import { TEAMS_DATA } from '../constants';
@@ -20,9 +22,9 @@ const WEEK_COUNT = 8;
 /** 額外欄位：在 W2, W6 與 W8 後各插入一欄 */
 type ExtraCol = { afterWeek: number; key: string; header: React.ReactNode };
 const EXTRA_COLS: ExtraCol[] = [
-  { afterWeek: 2, key: 'bonusW2', header: <span role="img" aria-label="bonus2">🎁健康餐</span> },
-  { afterWeek: 6, key: 'bonusW6', header: <span role="img" aria-label="bonus6">🎁整裝出發</span> },
-  { afterWeek: 8, key: 'bonusW8', header: <span role="img" aria-label="bonus8">💪增肌減脂</span> },
+  { afterWeek: 2, key: 'bonus2', header: <span role="img" aria-label="bonus2">🎁健康餐</span> },
+  { afterWeek: 6, key: 'bonus6', header: <span role="img" aria-label="bonus6">🎁整裝出發</span> },
+  { afterWeek: 8, key: 'bonus8', header: <span role="img" aria-label="bonus8">💪增肌減脂</span> },
 ];
 
 /** 「未填 / 特殊值」判斷：缺席、null、-1、或字串 "-" 視為待填 */
@@ -54,6 +56,7 @@ const toNum = (v: unknown) => (isPending(v) ? 0 : Number(v) || 0);
 
 /** 額外欄位原始值／數值 */
 const getExtraRaw = (t: Team, key: string): unknown => (t as any)[key];
+return anyT[key] ?? anyT[key.replace('bonusW', 'bonus')];
 const getExtraNum = (t: Team, key: string): number => toNum(getExtraRaw(t, key));
 
 /** 新公式：
@@ -62,9 +65,9 @@ const getExtraNum = (t: Team, key: string): number => toNum(getExtraRaw(t, key))
  */
 const calcTotal = (t: Team): number => {
   const weeklySum = getWeeklyRaw(t).reduce((s, v) => s + toNum(v), 0);
-  const bonus2 = getExtraNum(t, 'bonusW2');
-  const bonus6 = getExtraNum(t, 'bonusW6');
-  const bonus8 = getExtraNum(t, 'bonusW8');
+  const bonus2 = getExtraNum(t, 'bonus2');
+  const bonus6 = getExtraNum(t, 'bonus6');
+  const bonus8 = getExtraNum(t, 'bonus8');
   return (weeklySum + bonus2 + bonus6) * 0.4 + bonus8 * 0.6;
 };
 
