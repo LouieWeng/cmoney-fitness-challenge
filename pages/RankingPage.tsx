@@ -151,7 +151,7 @@ const RankingPage: React.FC = () => {
                   {/* W1~W8 ＋ 在 W2、W8 後插入額外欄位 */}
                   {Array.from({ length: WEEK_COUNT }, (_, i) => i + 1).map((wk) => {
                     if (wk === 8) {
-                      console.log('wk=6 extras →', EXTRA_COLS.filter(ec => ec.afterWeek === 6));
+                      console.log('wk=6 extras →', EXTRA_COLS.filter(ec => ec.afterWeek === 8));
                     }
                     return (
                       <React.Fragment key={`h-w${wk}`}>
