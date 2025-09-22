@@ -1,5 +1,7 @@
 console.log('EXTRA_COLS at runtime →', EXTRA_COLS);
 console.log('EXTRA_COLS now = ', EXTRA_COLS);
+console.log('[RankingPage] build tag = 2025-09-22-19:30');
+
 
 // pages/RankingPage.tsx
 import React, { useState } from 'react';
