@@ -13,105 +13,95 @@ const getTrophyIcon = (rank: number) => {
 };
 
 const gradientText =
-  'bg-gradient-to-r from-[#92FFFE] to-[#C4FF77] text-transparent bg-clip-text';
+  'bg-gradient-to-r from-[#92FFFE] to-[#4CFF77] text-transparent bg-clip-text';
 
 const WEEK_COUNT = 8;
 
-/** 額外欄位：在 W2, W6 與 W8 後各插入一欄 */
+/** 額外欄位: 在 W2, W6 與 W8 後插入一欄 */
 type ExtraCol = { afterWeek: number; key: string; header: React.ReactNode };
 const EXTRA_COLS: ExtraCol[] = [
   { afterWeek: 2, key: 'bonus2', header: <span role="img" aria-label="bonus2">🎁健康餐</span> },
-  { afterWeek: 6, key: 'bonus6', header: <span role="img" aria-label="bonus6">🎁整裝出發</span> },
-  { afterWeek: 8, key: 'bonus8', header: <span role="img" aria-label="bonus8">💪增肌減脂</span> },
+  { afterWeek: 6, key: 'bonus6', header: <span role="img" aria-label="bonus6">💪驚喜運動分數</span> },
+  { afterWeek: 8, key: 'bonus8', header: <span role="img" aria-label="bonus8">🎉增肌減脂</span> },
 ];
 
-/** 「未填 / 特殊值」判斷：缺席、null、-1、或字串 "-" 視為待填 */
+/** 未填 / 特殊值判斷: 空值, null, -1 或字串 "-" 視為待填 */
 const isPending = (v: unknown) =>
-  v === undefined ||
-  v === null ||
-  v === -1 ||
-  (typeof v === 'string' && v.trim() === '-');
+  v === undefined || v === null || v === -1 || (typeof v === 'string' && v.trim() === '-');
 
-/** 取回 W1~W8 的「原始值」（保留待填狀態） */
-const getWeeklyRaw = (t: Team): unknown[] => {
+/** 取得 W1-W8 的原始值 (保留待填狀況) */
+const getWeekLyRaw = (t: Team): unknown[] => {
   const anyT = t as any;
-  let arr: unknown[] | undefined = anyT.weekly || anyT.weeks || anyT.exerciseWeeks;
+  const arr: unknown[] | undefined = anyT.weekly || anyT.weeks || anyT.exerciseWeeks;
   if (!Array.isArray(arr)) {
-    const keys = ['w1','w2','w3','w4','w5','w6','w7','w8'];
-    if (keys.some(k => k in anyT)) arr = keys.map(k => anyT[k]);
+    const keys = ['w1', 'w2', 'w3', 'w4', 'w5', 'w6', 'w7', 'w8'];
+    if (keys.some(k => k in anyT)) {
+      return keys.map(k => anyT[k]);
+    }
+    return Array.from({ length: WEEK_COUNT }, (_, i) => arr ? arr[i] : undefined);
   }
-  return Array.from({ length: WEEK_COUNT }, (_, i) => (arr ? arr[i] : undefined));
+  return arr;
 };
 
-/** 顯示：若待填顯示灰色 "—"，否則顯示 +數字 */
+/** 顯示數值 (待填顯示 0) */
 const renderCell = (v: unknown) =>
-  isPending(v)
-    ? <span className="text-slate-500">—</span>
-    : <>+{Number(v) || 0}</>;
+  isPending(v) ? <span className="text-slate-500">—</span> : <>+{Number(v) || 0}</>;
 
-/** 轉數字：待填視為 0 */
+/** 轉成數字 (待填為 0) */
 const toNum = (v: unknown) => (isPending(v) ? 0 : Number(v) || 0);
 
-/** 額外欄位原始值／數值 */
+/** 取得額外欄位的原始值 / 數字 */
 const getExtraRaw = (t: Team, key: string): unknown => (t as any)[key];
 const getExtraNum = (t: Team, key: string): number => toNum(getExtraRaw(t, key));
 
-/** 新公式：
- * 當前積分 = (W1~W8 + bonusW2 + bonusW6) 的總和 × 0.4 ＋ (bonusW8) × 0.6
- * （待填值不計入＝當作 0）
- */
+/** 總分計算 = (W1~W8 + bonus2 + bonus6) 的總和 × 0.4 + (bonus8) × 0.6 */
 const calcTotal = (t: Team): number => {
-  const weeklySum = getWeeklyRaw(t).reduce((s, v) => s + toNum(v), 0);
+  const weeklySum = getWeekLyRaw(t).reduce((s, v) => s + toNum(v), 0);
   const bonus2 = getExtraNum(t, 'bonus2');
   const bonus6 = getExtraNum(t, 'bonus6');
   const bonus8 = getExtraNum(t, 'bonus8');
   return (weeklySum + bonus2 + bonus6) * 0.4 + bonus8 * 0.6;
 };
 
-/** 四捨五入到 1 位小數 */
+/** 四捨五入到小數一位 */
 const format1 = (n: number) => (Math.round(n * 10) / 10).toFixed(1);
 
 const RankingPage: React.FC = () => {
   const [gender, setGender] = useState<'male' | 'female'>('male');
   const [showScoreTip, setShowScoreTip] = useState(false);
 
-  const filteredTeams = TEAMS_DATA
-    .filter((team) => team.gender === gender)
-    .sort((a, b) => calcTotal(b) - calcTotal(a));
+  const filteredTeams = TEAMS_DATA.filter(team => team.gender === gender);
+  filteredTeams.sort((a, b) => calcTotal(b) - calcTotal(a));
 
-  const withRanks = filteredTeams.reduce(
-    (acc: Array<{ team: Team; rank: number }>, team, i) => {
-      const prev = acc[i - 1];
-      const rank =
-        i > 0 && prev && calcTotal(team) === calcTotal(prev.team) ? prev.rank : i + 1;
-      acc.push({ team, rank });
-      return acc;
-    },
-    []
-  );
+  const withRanks = filteredTeams.reduce((acc: Array<{ team: Team; rank: number }>, team, i) => {
+    const prev = acc[i - 1];
+    const rank = i > 0 && calcTotal(team) === calcTotal(prev.team) ? prev.rank : i + 1;
+    acc.push({ team, rank });
+    return acc;
+  }, []);
 
-  const top3Count = withRanks.filter((r) => r.rank <= 3).length;
+  const top3Count = withRanks.filter(r => r.rank <= 3).length;
 
   return (
     <div className="space-y-12">
-      {/* ====== 標題 ====== */}
+      {/* 標題區塊 */}
       <section className="text-center">
         <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white">
           快來關注 <span className={gradientText}>每週賽況</span>
         </h1>
         <p className="mt-3 max-w-2xl mx-auto text-lg text-slate-300">
-          每週五前將結算前一週的運動打卡分數，並且更新到賽況。
+          每週五前將會結算前一週的運動打卡分數，並且更新到賽況。
         </p>
         <p className="mt-3 max-w-2xl mx-auto text-lg text-slate-300">
           最近更新：09/22
         </p>
       </section>
 
-      {/* ====== 男女子組頁籤 ====== */}
+      {/* 性別切換 */}
       <div className="flex justify-center">
         <div className="relative inline-flex bg-slate-800 p-1 rounded-full">
           <div
-            className={`absolute inset-[2px] w-1/2 rounded-full bg-gradient-to-r from-[#92FFFE] to-[#C4FF77] transition-transform duration-300 ease-in-out ${
+            className={`absolute inset-[2px] w-1/2 rounded-full bg-gradient-to-r from-[#92FFFE] to-[#4CFF77] transition-transform duration-300 ease-in-out ${
               gender === 'female' ? 'translate-x-[calc(100%-4px)]' : 'translate-x-0'
             }`}
           />
@@ -125,7 +115,7 @@ const RankingPage: React.FC = () => {
           </button>
           <button
             onClick={() => setGender('female')}
-            className={`relative z-10 px-6 py-2 text-center font-bold rounded.full min-w-[96px] transition ${
+            className={`relative z-10 px-6 py-2 text-center font-bold rounded-full min-w-[96px] transition ${
               gender === 'female' ? 'text-slate-900' : 'text-white'
             }`}
           >
@@ -134,7 +124,7 @@ const RankingPage: React.FC = () => {
         </div>
       </div>
 
-      {/* ====== table 區塊 ====== */}
+      {/* table 區塊 */}
       <section className="max-w-6xl mx-auto">
         <div className="bg-slate-800 shadow-lg rounded-lg overflow-hidden">
           <div className="overflow-x-auto">
@@ -148,69 +138,56 @@ const RankingPage: React.FC = () => {
                     組別 / 成員
                   </th>
 
-                  {/* W1~W8 ＋ 在 W2、W8 後插入額外欄位 */}
-                  {Array.from({ length: WEEK_COUNT }, (_, i) => i + 1).map((wk) => {
-                    if (wk === 6) {
-                      console.log('wk=6 extras →', EXTRA_COLS.filter(ec => ec.afterWeek === 6));
-                    }
-                    return (
-                      <React.Fragment key={`h-w${wk}`}>
-                        <th className="px-4 py-3 text-center text-xs font-medium text-slate-300 uppercase tracking-wider">
-                          W{wk}
+                  {/* W1~W8 ＋ 在 W2、W6、W8 後插入額外欄位 */}
+                  {Array.from({ length: WEEK_COUNT }, (_, i) => i + 1).map((wk) => (
+                    <React.Fragment key={`h-w${wk}`}>
+                      <th className="px-4 py-3 text-center text-xs font-medium text-slate-300 uppercase tracking-wider">
+                        W{wk}
+                      </th>
+                      {EXTRA_COLS.filter(ec => Number(ec.afterWeek) === wk).map((ec) => (
+                        <th
+                          key={`h-extra${ec.key}`}
+                          className="px-3 py-3 text-center text-xs font-medium text-slate-300 uppercase tracking-wider"
+                        >
+                          {ec.header}
                         </th>
-                        {EXTRA_COLS.filter(ec => ec.afterWeek === wk).map((ec) => (
-                          <th
-                            key={`h-extra-${ec.key}`}
-                            className="px-3 py-3 text-center text-xs font-medium text-slate-300 uppercase tracking-wider"
-                          >
-                            {ec.header}
-                          </th>
-                        ))}
-                      </React.Fragment>
-                    );
-                  })}
-
+                      ))}
+                    </React.Fragment>
+                  ))}
 
                   <th className="px-6 py-3 text-right text-xs font-medium text-slate-300 uppercase tracking-wider">
                     <span className="align-middle">當前積分</span>
                     <span className="relative inline-block ml-2 align-middle">
                       <button
                         type="button"
-                        onClick={() => setShowScoreTip((v) => !v)}
+                        onClick={() => setShowScoreTip(v => !v)}
                         onBlur={() => setShowScoreTip(false)}
-                        className="align-middle inline-flex items-center justify-center w-4 h-4 rounded-full bg-slate-700 text-slate-200 text-[10px] font-bold"
-                        aria-label="顯示說明"
+                        className="align-middle flex items-center justify-center w-4 h-4 rounded-full bg-slate-700 text-slate-200 text-[10px] font-bold"
+                        aria-label="顯示積分說明"
                         aria-expanded={showScoreTip}
                       >
                         i
                       </button>
                       {showScoreTip && (
-                        <div className="absolute right-0 mt-2 w-80 text-left whitespace-normal bg-slate-900 text-slate-100 text-xs px-3 py-2 rounded-md shadow-lg ring-1 ring-slate-700 z-50">
-                          當前積分 = (W1~W8運動打卡 + 🎁驚喜任務) 的總和 × 40% ＋ (💪增肌減脂分數) × 60%
+                        <div className="absolute right-0 mt-2 w-80 text-left whitespace-normal bg-slate-900 text-slate-100 text-xs px-3 py-2 rounded-md shadow-lg ring-1 ring-slate-700">
+                          當前積分 = (W1~W8運動打卡分數 + 🎁健康餐分數 + 💪驚喜運動分數) × 40% + (🎉增肌減脂分數) × 60%
                         </div>
                       )}
                     </span>
                   </th>
                 </tr>
               </thead>
-
               <tbody className="bg-slate-800 divide-y divide-slate-700">
                 {withRanks.map(({ team, rank }) => {
-                  const weeklyRaw = getWeeklyRaw(team);
+                  const weekLyRaw = getWeekLyRaw(team);
                   return (
                     <tr key={team.id} className={rank <= 3 ? 'bg-slate-700/30' : ''}>
-                      {/* 排名 */}
-                      {/*<td className="px-6 py-4 whitespace-nowrap text-lg font-bold">
-                        {rank <= 3 && top3Count <= 5 ? getTrophyIcon(rank) : null}
-                        <span className="hidden sm:inline">{rank}</span>
-                      </td>*/}
-                      <td className="px-6 py-4 whitespace-nowrap text-lg font-bold flex items-center gap-1">
+                      {/* 排名 / 獎盃 */}
+                      <td className="px-6 py-4 whitespace-nowrap text-lg font-bold">
                         {rank <= 3 && top3Count <= 5 ? getTrophyIcon(rank) : null}
                         <span>{rank}</span>
                       </td>
-
-                    
-                      {/* 組別 / 成員：把 #id + 隊名合併在同一個框 */}
+                      {/* 組別 / 成員 */}
                       <td className="px-6 py-4 text-white">
                         <div className="flex items-center gap-2 min-w-0">
                           <span
@@ -218,37 +195,31 @@ const RankingPage: React.FC = () => {
                             title={`#${team.id} ${team.name}`}
                           >
                             <span className="text-sm font-bold whitespace-nowrap">#{team.id}</span>
-                            <span className="text-sm sm:text-base font-semibold truncate">{team.name}</span>
+                            <span className="text-sm text-base font-semibold truncate">{team.name}</span>
                           </span>
                         </div>
-
-                        {/* 成員（維持原樣） */}
                         <div className="text-slate-300 text-sm mt-1">
                           {team.members.map((m, i) => (
                             <span key={i}>
                               {m}
-                              {i < team.members.length - 1 && (
-                                <span className="text-slate-500"> &nbsp;&amp;&nbsp; </span>
-                              )}
+                              {i < team.members.length - 1 && <span className="text-slate-500">&nbsp;&amp;&nbsp;</span>}
                             </span>
                           ))}
                         </div>
                       </td>
-
-
-                      {/* W1~W8 + 兩個額外欄位（帶灰色「—」顯示） */}
-                      {weeklyRaw.map((raw, idx) => {
+                      {/* W1-W8 + bonus */}
+                      {weekLyRaw.map((raw, idx) => {
                         const wk = idx + 1;
                         return (
                           <React.Fragment key={`${team.id}-w${wk}`}>
                             <td className="px-4 py-4 whitespace-nowrap text-white text-center">
                               {renderCell(raw)}
                             </td>
-                            {EXTRA_COLS.filter(ec => ec.afterWeek === wk).map((ec) => {
+                            {EXTRA_COLS.filter(ec => Number(ec.afterWeek) === wk).map((ec) => {
                               const rawExtra = getExtraRaw(team, ec.key);
                               return (
                                 <td
-                                  key={`${team.id}-extra-${ec.key}`}
+                                  key={`${team.id}_extra-${ec.key}`}
                                   className="px-3 py-4 whitespace-nowrap text-white text-center"
                                 >
                                   {renderCell(rawExtra)}
@@ -258,8 +229,7 @@ const RankingPage: React.FC = () => {
                           </React.Fragment>
                         );
                       })}
-
-                      {/* 當前積分（新公式） */}
+                      {/* 總分 */}
                       <td className="px-6 py-4 whitespace-nowrap text-right text-lg font-bold">
                         <span className={gradientText}>{format1(calcTotal(team))}</span>
                       </td>
@@ -270,30 +240,34 @@ const RankingPage: React.FC = () => {
             </table>
           </div>
         </div>
-
         <p className="text-center text-slate-400 mt-4 text-sm">
-          提醒：每週需確實完成3次運動打卡，並上傳認證照至雲端，審核通過才會認列積分。
+          提醒：每週需攜帶完成3天運動打卡，並上傳認證照至雲端，將經過審查才會認列積分。
         </p>
       </section>
 
       {/* Upload Section */}
       <section className="bg-slate-800 rounded-lg p-8">
         <div className="flex flex-col md:flex-row items-center justify-center md:justify-between gap-6">
-            <div className="text-center md:text-left">
-                <h2 className="text-2xl font-bold text-white">看完排名忍不住想運動了嗎？快去運動打卡吧！</h2>
-            </div>
-            <div className="flex flex-col sm:flex-row gap-4 flex-shrink-0">
-                <a href={"https://drive.google.com/drive/u/0/folders/1d-JmO9mOgzwFn-2AMeuIUuh-IM_5qSrv"} target="_blank" rel="noopener noreferrer" className="inline-block bg-gradient-to-r from-[#92FFFE] to-[#C4FF77] text-slate-900 font-bold py-3 px-8 rounded-lg hover:brightness-110 transition-all">
-                    上傳認證照
-                </a>
-            </div>
+          <div className="text-center md:text-left">
+            <h2 className="text-2xl font-bold text-white">賽事排名是不是很想趕快運動了嗎？快去運動打卡吧！</h2>
+          </div>
+          <div className="flex flex-col sm:flex-row gap-4 flex-shrink-0">
+            <a
+              href="https://drive.google.com/drive/u/0/folders/1d-Jm09mOgzwFn-2AMeuIUuh-IM_5qSrv"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block bg-gradient-to-r from-[#92FFFE] to-[#4CFF77] text-slate-900 font-bold py-2 px-4 rounded-lg"
+            >
+              上傳認證照
+            </a>
+          </div>
         </div>
       </section>
-
     </div>
   );
 };
 
 export default RankingPage;
+
 
 
