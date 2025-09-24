@@ -20,8 +20,8 @@ const WEEK_COUNT = 8;
 /** 額外欄位: 在 W2、W6、W8 後插入一欄 */
 type ExtraCol = { afterWeek: number; key: string; header: React.ReactNode };
 const EXTRA_COLS: ExtraCol[] = [
-  { afterWeek: 2, key: 'bonusW2', header: <span role="img" aria-label="bonusW2">🎁健康餐</span> },
-  { afterWeek: 6, key: 'bonusW6', header: <span role="img" aria-label="bonusW6">🎁運動裝備</span> },
+  { afterWeek: 2, key: 'bonusW2', header: <span role="img" aria-label="bonusW2">🍱健康餐</span> },
+  { afterWeek: 6, key: 'bonusW6', header: <span role="img" aria-label="bonusW6">🎒運動裝備</span> },
   { afterWeek: 8, key: 'bonusW8', header: <span role="img" aria-label="bonusW8">🎉增肌減脂</span> },
 ];
 
@@ -163,7 +163,7 @@ const RankingPage: React.FC = () => {
                       </button>
                       {showScoreTip && (
                         <div className="absolute right-0 mt-2 w-80 text-left whitespace-normal bg-slate-900 text-slate-100 text-xs px-3 py-2 rounded-md shadow-lg ring-1 ring-slate-700">
-                          當前積分 = (W1~W8運動打卡分數 + 🎁健康餐分數 + 🎁運動裝備分數) × 40% + (🎉增肌減脂分數) × 60%
+                          當前積分 = (W1~W8運動打卡分數 + 🍱健康餐分數 + 🎒運動裝備分數) × 40% + (🎉增肌減脂分數) × 60%
                         </div>
                       )}
                     </span>
