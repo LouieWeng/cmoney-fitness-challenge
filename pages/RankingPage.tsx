@@ -18,12 +18,20 @@ const gradientText =
 const WEEK_COUNT = 8;
 
 /** 額外欄位: 在 W2, W6 與 W8 後插入一欄 */
+// ✅ 在 pages/RankingPage.tsx 裡，覆蓋這段定義即可
 type ExtraCol = { afterWeek: number; key: string; header: React.ReactNode };
 const EXTRA_COLS: ExtraCol[] = [
-  { afterWeek: 2, key: 'bonus2', header: <span role="img" aria-label="bonus2">🎁健康餐</span> },
-  { afterWeek: 6, key: 'bonus6', header: <span role="img" aria-label="bonus6">💪驚喜運動分數</span> },
-  { afterWeek: 8, key: 'bonus8', header: <span role="img" aria-label="bonus8">🎉增肌減脂</span> },
+  { afterWeek: 2, key: 'bonus6'  /* ←如果你的資料鍵是 bonusW2，就改成 'bonusW2' */,
+    header: <span role="img" aria-label="bonus2">🎁健康餐</span> },
+
+  // 🔥 這筆是關鍵：一定要存在，afterWeek = 6
+  { afterWeek: 6, key: 'bonus6'  /* ←如果你的資料鍵是 bonusW6，就改成 'bonusW6' */,
+    header: <span role="img" aria-label="bonus6">💪驚喜運動分數</span> },
+
+  { afterWeek: 8, key: 'bonus8'  /* ←如果你的資料鍵是 bonusW8，就改成 'bonusW8' */,
+    header: <span role="img" aria-label="bonus8">🎉增肌減脂</span> },
 ];
+
 
 /** 未填 / 特殊值判斷: 空值, null, -1 或字串 "-" 視為待填 */
 const isPending = (v: unknown) =>
