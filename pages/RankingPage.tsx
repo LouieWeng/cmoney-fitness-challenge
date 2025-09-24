@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { TEAMS_DATA } from '../constants';
 import { Team } from '../types';
 
-/** 獎盃圖示（與你原本相同） */
+/** 獎盃圖示（原樣保留） */
 const getTrophyIcon = (rank: number) => {
   const iconClass = 'h-6 w-6 inline-block mr-2';
   if (rank === 1) return <span className={`${iconClass} text-yellow-400`}>🏆</span>;
@@ -17,7 +17,7 @@ const gradientText =
 
 const WEEK_COUNT = 8;
 
-/** 額外欄位: 在 W2, W6 與 W8 後插入一欄（✅ 確保有三筆） */
+/** 額外欄位: 在 W2、W6、W8 後插入一欄 */
 type ExtraCol = { afterWeek: number; key: string; header: React.ReactNode };
 const EXTRA_COLS: ExtraCol[] = [
   { afterWeek: 2, key: 'bonusW2', header: <span role="img" aria-label="bonusW2">🎁健康餐</span> },
@@ -25,11 +25,11 @@ const EXTRA_COLS: ExtraCol[] = [
   { afterWeek: 8, key: 'bonusW8', header: <span role="img" aria-label="bonusW8">🎉增肌減脂</span> },
 ];
 
-/** 未填 / 特殊值判斷: 空值, null, -1 或字串 "-" 視為待填 */
+/** 未填 / 特殊值判斷 */
 const isPending = (v: unknown) =>
   v === undefined || v === null || v === -1 || (typeof v === 'string' && v.trim() === '-');
 
-/** 取得 W1-W8 的原始值 (保留待填狀況) */
+/** 取得 W1-W8 的原始值 */
 const getWeekLyRaw = (t: Team): unknown[] => {
   const anyT = t as any;
   const arr: unknown[] | undefined = anyT.weekly || anyT.weeks || anyT.exerciseWeeks;
@@ -43,18 +43,18 @@ const getWeekLyRaw = (t: Team): unknown[] => {
   return arr;
 };
 
-/** 顯示數值 (待填顯示 —) */
+/** 顯示數值：未填顯示 - */
 const renderCell = (v: unknown) =>
-  isPending(v) ? <span className="text-slate-500">—</span> : <>+{Number(v) || 0}</>;
+  isPending(v) ? <span className="text-slate-500">-</span> : <>+{Number(v) || 0}</>;
 
-/** 轉成數字 (待填為 0) */
+/** 轉數字 */
 const toNum = (v: unknown) => (isPending(v) ? 0 : Number(v) || 0);
 
-/** 取得額外欄位的原始值 / 數字（key 對齊 constants.ts：bonusW2/bonusW6/bonusW8） */
+/** 額外欄位 raw/num */
 const getExtraRaw = (t: Team, key: string): unknown => (t as any)[key];
 const getExtraNum = (t: Team, key: string): number => toNum(getExtraRaw(t, key));
 
-/** 總分計算 = (W1~W8 + bonusW2 + bonusW6) 的總和 × 0.4 + (bonusW8) × 0.6 */
+/** 總分計算 */
 const calcTotal = (t: Team): number => {
   const weeklySum = getWeekLyRaw(t).reduce((s, v) => s + toNum(v), 0);
   const bonus2 = getExtraNum(t, 'bonusW2');
@@ -92,9 +92,7 @@ const RankingPage: React.FC = () => {
         <p className="mt-3 max-w-2xl mx-auto text-lg text-slate-300">
           每週五前將會結算前一週的運動打卡分數，並且更新到賽況。
         </p>
-        <p className="mt-3 max-w-2xl mx-auto text-lg text-slate-300">
-          最近更新：09/24 （目前遇到技術問題，修復中，分數晚點更正！！！）
-        </p>
+        <p className="mt-3 max-w-2xl mx-auto text-lg text-slate-300">最近更新：09/22</p>
       </section>
 
       {/* 性別切換 */}
@@ -131,14 +129,9 @@ const RankingPage: React.FC = () => {
             <table className="min-w-full">
               <thead className="bg-slate-700/50">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-slate-300 uppercase tracking-wider">
-                    排名
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-slate-300 uppercase tracking-wider">
-                    組別 / 成員
-                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-slate-300 uppercase tracking-wider">排名</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-slate-300 uppercase tracking-wider">組別 / 成員</th>
 
-                  {/* W1~W8 ＋ 在 W2、W6、W8 後插入額外欄位（✅ 用 Number(...) 確保型別一致） */}
                   {Array.from({ length: WEEK_COUNT }, (_, i) => i + 1).map((wk) => (
                     <React.Fragment key={`h-w${wk}`}>
                       <th className="px-4 py-3 text-center text-xs font-medium text-slate-300 uppercase tracking-wider">
@@ -177,17 +170,17 @@ const RankingPage: React.FC = () => {
                   </th>
                 </tr>
               </thead>
+
               <tbody className="bg-slate-800 divide-y divide-slate-700">
                 {withRanks.map(({ team, rank }) => {
                   const weekLyRaw = getWeekLyRaw(team);
                   return (
                     <tr key={team.id} className={rank <= 3 ? 'bg-slate-700/30' : ''}>
-                      {/* 排名 / 獎盃 */}
                       <td className="px-6 py-4 whitespace-nowrap text-lg font-bold">
                         {rank <= 3 && top3Count <= 5 ? getTrophyIcon(rank) : null}
                         <span>{rank}</span>
                       </td>
-                      {/* 組別 / 成員 */}
+
                       <td className="px-6 py-4 text-white">
                         <div className="flex items-center gap-2 min-w-0">
                           <span
@@ -207,7 +200,7 @@ const RankingPage: React.FC = () => {
                           ))}
                         </div>
                       </td>
-                      {/* W1-W8 + bonus（✅ 用 Number(...) 確保型別一致） */}
+
                       {weekLyRaw.map((raw, idx) => {
                         const wk = idx + 1;
                         return (
@@ -229,7 +222,7 @@ const RankingPage: React.FC = () => {
                           </React.Fragment>
                         );
                       })}
-                      {/* 總分 */}
+
                       <td className="px-6 py-4 whitespace-nowrap text-right text-lg font-bold">
                         <span className={gradientText}>{format1(calcTotal(team))}</span>
                       </td>
@@ -240,12 +233,12 @@ const RankingPage: React.FC = () => {
             </table>
           </div>
         </div>
+
         <p className="text-center text-slate-400 mt-4 text-sm">
           提醒：每週需攜帶完成3天運動打卡，並上傳認證照至雲端，將經過審查才會認列積分。
         </p>
       </section>
 
-      {/* Upload Section */}
       <section className="bg-slate-800 rounded-lg p-8">
         <div className="flex flex-col md:flex-row items-center justify-center md:justify-between gap-6">
           <div className="text-center md:text-left">
@@ -268,7 +261,3 @@ const RankingPage: React.FC = () => {
 };
 
 export default RankingPage;
-
-
-
-
