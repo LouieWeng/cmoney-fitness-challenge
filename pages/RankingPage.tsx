@@ -17,21 +17,13 @@ const gradientText =
 
 const WEEK_COUNT = 8;
 
-/** 額外欄位: 在 W2, W6 與 W8 後插入一欄 */
-// ✅ 在 pages/RankingPage.tsx 裡，覆蓋這段定義即可
+/** 額外欄位: 在 W2, W6 與 W8 後插入一欄（✅ 確保有三筆） */
 type ExtraCol = { afterWeek: number; key: string; header: React.ReactNode };
 const EXTRA_COLS: ExtraCol[] = [
-  { afterWeek: 2, key: 'bonus6'  /* ←如果你的資料鍵是 bonusW2，就改成 'bonusW2' */,
-    header: <span role="img" aria-label="bonus2">🎁健康餐</span> },
-
-  // 🔥 這筆是關鍵：一定要存在，afterWeek = 6
-  { afterWeek: 6, key: 'bonus6'  /* ←如果你的資料鍵是 bonusW6，就改成 'bonusW6' */,
-    header: <span role="img" aria-label="bonus6">💪驚喜運動分數</span> },
-
-  { afterWeek: 8, key: 'bonus8'  /* ←如果你的資料鍵是 bonusW8，就改成 'bonusW8' */,
-    header: <span role="img" aria-label="bonus8">🎉增肌減脂</span> },
+  { afterWeek: 2, key: 'bonusW2', header: <span role="img" aria-label="bonusW2">🎁健康餐</span> },
+  { afterWeek: 6, key: 'bonusW6', header: <span role="img" aria-label="bonusW6">🎁運動裝備</span> },
+  { afterWeek: 8, key: 'bonusW8', header: <span role="img" aria-label="bonusW8">🎉增肌減脂</span> },
 ];
-
 
 /** 未填 / 特殊值判斷: 空值, null, -1 或字串 "-" 視為待填 */
 const isPending = (v: unknown) =>
@@ -46,28 +38,28 @@ const getWeekLyRaw = (t: Team): unknown[] => {
     if (keys.some(k => k in anyT)) {
       return keys.map(k => anyT[k]);
     }
-    return Array.from({ length: WEEK_COUNT }, (_, i) => arr ? arr[i] : undefined);
+    return Array.from({ length: WEEK_COUNT }, (_, i) => arr ? (arr as any)[i] : undefined);
   }
   return arr;
 };
 
-/** 顯示數值 (待填顯示 0) */
+/** 顯示數值 (待填顯示 —) */
 const renderCell = (v: unknown) =>
   isPending(v) ? <span className="text-slate-500">—</span> : <>+{Number(v) || 0}</>;
 
 /** 轉成數字 (待填為 0) */
 const toNum = (v: unknown) => (isPending(v) ? 0 : Number(v) || 0);
 
-/** 取得額外欄位的原始值 / 數字 */
+/** 取得額外欄位的原始值 / 數字（key 對齊 constants.ts：bonusW2/bonusW6/bonusW8） */
 const getExtraRaw = (t: Team, key: string): unknown => (t as any)[key];
 const getExtraNum = (t: Team, key: string): number => toNum(getExtraRaw(t, key));
 
-/** 總分計算 = (W1~W8 + bonus2 + bonus6) 的總和 × 0.4 + (bonus8) × 0.6 */
+/** 總分計算 = (W1~W8 + bonusW2 + bonusW6) 的總和 × 0.4 + (bonusW8) × 0.6 */
 const calcTotal = (t: Team): number => {
   const weeklySum = getWeekLyRaw(t).reduce((s, v) => s + toNum(v), 0);
-  const bonus2 = getExtraNum(t, 'bonus2');
-  const bonus6 = getExtraNum(t, 'bonus6');
-  const bonus8 = getExtraNum(t, 'bonus8');
+  const bonus2 = getExtraNum(t, 'bonusW2');
+  const bonus6 = getExtraNum(t, 'bonusW6');
+  const bonus8 = getExtraNum(t, 'bonusW8');
   return (weeklySum + bonus2 + bonus6) * 0.4 + bonus8 * 0.6;
 };
 
@@ -146,7 +138,7 @@ const RankingPage: React.FC = () => {
                     組別 / 成員
                   </th>
 
-                  {/* W1~W8 ＋ 在 W2、W6、W8 後插入額外欄位 */}
+                  {/* W1~W8 ＋ 在 W2、W6、W8 後插入額外欄位（✅ 用 Number(...) 確保型別一致） */}
                   {Array.from({ length: WEEK_COUNT }, (_, i) => i + 1).map((wk) => (
                     <React.Fragment key={`h-w${wk}`}>
                       <th className="px-4 py-3 text-center text-xs font-medium text-slate-300 uppercase tracking-wider">
@@ -178,7 +170,7 @@ const RankingPage: React.FC = () => {
                       </button>
                       {showScoreTip && (
                         <div className="absolute right-0 mt-2 w-80 text-left whitespace-normal bg-slate-900 text-slate-100 text-xs px-3 py-2 rounded-md shadow-lg ring-1 ring-slate-700">
-                          當前積分 = (W1~W8運動打卡分數 + 🎁健康餐分數 + 💪驚喜運動分數) × 40% + (🎉增肌減脂分數) × 60%
+                          當前積分 = (W1~W8運動打卡分數 + 🎁健康餐分數 + 🎁運動裝備分數) × 40% + (🎉增肌減脂分數) × 60%
                         </div>
                       )}
                     </span>
@@ -215,7 +207,7 @@ const RankingPage: React.FC = () => {
                           ))}
                         </div>
                       </td>
-                      {/* W1-W8 + bonus */}
+                      {/* W1-W8 + bonus（✅ 用 Number(...) 確保型別一致） */}
                       {weekLyRaw.map((raw, idx) => {
                         const wk = idx + 1;
                         return (
@@ -276,6 +268,7 @@ const RankingPage: React.FC = () => {
 };
 
 export default RankingPage;
+
 
 
 
