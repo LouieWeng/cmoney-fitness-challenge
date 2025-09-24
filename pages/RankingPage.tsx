@@ -242,7 +242,7 @@ const RankingPage: React.FC = () => {
       <section className="bg-slate-800 rounded-lg p-8">
         <div className="flex flex-col md:flex-row items-center justify-center md:justify-between gap-6">
           <div className="text-center md:text-left">
-            <h2 className="text-2xl font-bold text-white">賽事排名是不是很想趕快運動了嗎？快去運動打卡吧！</h2>
+            <h2 className="text-2xl font-bold text-white">看完賽事排名是不是很想趕快運動了嗎？快去運動打卡吧！</h2>
           </div>
           <div className="flex flex-col sm:flex-row gap-4 flex-shrink-0">
             <a
