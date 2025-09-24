@@ -246,7 +246,7 @@ const RankingPage: React.FC = () => {
           </div>
           <div className="flex flex-col sm:flex-row gap-4 flex-shrink-0">
             <a
-              href="https://drive.google.com/drive/u/0/folders/1d-Jm09mOgzwFn-2AMeuIUuh-IM_5qSrv"
+              href="https://drive.google.com/drive/u/0/folders/1OwkvMSo4h746QfWW-vczZGOBn-BVl89U"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block bg-gradient-to-r from-[#92FFFE] to-[#4CFF77] text-slate-900 font-bold py-2 px-4 rounded-lg"
