@@ -118,7 +118,7 @@ const RankingPage: React.FC = () => {
   const top3Count = withRanks.filter(r => r.rank <= 3).length;
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-12">
       {/* 標題區塊 */}
       <section className="text-center">
         <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white">
