@@ -158,20 +158,21 @@ const RankingPage: React.FC = () => {
       </div>
 
       {/* 排名結果海報 */}
-      <section className="max-w-6xl mx-auto -mt-16 relative z-0">
+      <section className="relative z-0 -mb-32">
         {/* 桌機版 */}
         <img
           src={RANKING_POSTERS[gender].desktop}
           alt={`${gender === 'male' ? '男子組' : '女子組'} 排名結果（桌機版）`}
-          className="hidden md:block w-full h-auto rounded-3xl shadow-lg"
+          className="hidden md:block w-[120%] -ml-[10%] h-auto rounded-3xl shadow-lg"
         />
         {/* 手機版 */}
         <img
           src={RANKING_POSTERS[gender].mobile}
           alt={`${gender === 'male' ? '男子組' : '女子組'} 排名結果（手機版）`}
-          className="md:hidden w-full h-auto rounded-3xl shadow-lg"
+          className="md:hidden w-[120%] -ml-[10%] h-auto rounded-3xl shadow-lg"
         />
       </section>
+
 
 
       {/* table 區塊 */}
