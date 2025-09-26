@@ -17,7 +17,7 @@ const gradientText =
 
 /** 增肌減脂專用紅橙漸層 */
 const gradientTextW8 =
-  'bg-[linear-gradient(90deg,#FF6600_0%,#FFBB00_100%)] bg-clip-text text-transparent';
+  'bg-[linear-gradient(90deg,#82FFF7_0%,#82FFF7_100%)] bg-clip-text text-transparent';
 
 
 const WEEK_COUNT = 8;
