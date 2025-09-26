@@ -158,7 +158,7 @@ const RankingPage: React.FC = () => {
       </div>
 
       {/* 排名結果海報 */}
-      <section className="relative z-0 -mb-16000px flex justify-center">
+      <section className="relative z-0 flex justify-center -mb-[220px] md:-mb-[300px]">
         {/* 桌機版 */}
         <img
           src={RANKING_POSTERS[gender].desktop}
@@ -174,7 +174,7 @@ const RankingPage: React.FC = () => {
       </section>
 
       {/* table 區塊 */}
-      <section className="max-w-6xl mx-auto relative z-10 -mt-16000px">
+      <section className="max-w-6xl mx-auto relative z-10 -mt-[220px] md:-mt-[300px]">
         <div className="bg-slate-800 shadow-lg rounded-lg overflow-hidden">
           <div className="overflow-x-auto">
             <table className="min-w-full">
