@@ -235,7 +235,7 @@ const RankingPage: React.FC = () => {
         </div>
 
         <p className="text-center text-slate-400 mt-4 text-sm">
-          提醒：每週需攜帶完成3天運動打卡，並上傳認證照至雲端，將經過審查才會認列積分。
+          提醒：每週需完成3天運動打卡，並上傳認證照至雲端，將經過審查才會認列積分。
         </p>
       </section>
 
