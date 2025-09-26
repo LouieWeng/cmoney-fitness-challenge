@@ -3,6 +3,18 @@ import React, { useState } from 'react';
 import { TEAMS_DATA } from '../constants';
 import { Team } from '../types';
 
+/** 排名結果海報：依性別與裝置切換 */
+const RANKING_POSTERS = {
+  male: {
+    desktop: '/male-desktop.png',
+    mobile: '/male-mobile.png',
+  },
+  female: {
+    desktop: '/female-desktop.png',
+    mobile: '/female-mobile.png',
+  },
+} as const;
+
 /** 獎盃圖示（原樣保留） */
 const getTrophyIcon = (rank: number) => {
   const iconClass = 'h-6 w-6 inline-block mr-2';
@@ -144,6 +156,23 @@ const RankingPage: React.FC = () => {
           </button>
         </div>
       </div>
+
+      {/* 排名結果海報 */}
+      <section className="max-w-6xl mx-auto -mt-16 relative z-0">
+        {/* 桌機版 */}
+        <img
+          src={RANKING_POSTERS[gender].desktop}
+          alt={`${gender === 'male' ? '男子組' : '女子組'} 排名結果（桌機版）`}
+          className="hidden md:block w-full h-auto rounded-3xl shadow-lg"
+        />
+        {/* 手機版 */}
+        <img
+          src={RANKING_POSTERS[gender].mobile}
+          alt={`${gender === 'male' ? '男子組' : '女子組'} 排名結果（手機版）`}
+          className="md:hidden w-full h-auto rounded-3xl shadow-lg"
+        />
+      </section>
+
 
       {/* table 區塊 */}
       <section className="max-w-6xl mx-auto">
