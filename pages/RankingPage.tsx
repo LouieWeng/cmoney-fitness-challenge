@@ -15,10 +15,6 @@ const getTrophyIcon = (rank: number) => {
 const gradientText =
   'bg-gradient-to-r from-[#92FFFE] to-[#4CFF77] text-transparent bg-clip-text';
 
-/** ✅ 增肌減脂（bonusW8）專用：紅橙漸層文字 */
-const gradientTextW8 =
-  'bg-[linear-gradient(90deg,#FF6600_0%,#FFBB00_100%)] bg-clip-text text-transparent';
-
 const WEEK_COUNT = 8;
 
 /** 額外欄位: 在 W2、W6、W8 後插入一欄 */
@@ -51,13 +47,13 @@ const getWeekLyRaw = (t: Team): unknown[] => {
 const renderCell = (v: unknown) =>
   isPending(v) ? <span className="text-slate-500">-</span> : <>+{Number(v) || 0}</>;
 
-/** ✅ W8Bonus 顯示（含紅橙漸層 & 負數不加 +） */
+/** ✅ 只有 W8Bonus 使用的顯示規則 */
 const renderW8Bonus = (v: unknown) => {
   if (isPending(v)) return <span className="text-slate-500">-</span>;
   const n = Number(v);
   if (Number.isNaN(n)) return <span className="text-slate-500">-</span>;
-  const text = n < 0 ? `${n}` : `+${n}`;
-  return <span className={`${gradientTextW8} font-semibold`}>{text}</span>;
+  if (n < 0) return <>{n}</>;          // 負數不加「+」
+  return <>+{n}</>;                    // 正數或 0 加「+」
 };
 
 /** 轉數字 */
@@ -97,16 +93,91 @@ const RankingPage: React.FC = () => {
 
   return (
     <div className="space-y-12">
-      {/* 上面內容保持不變 ... */}
+      {/* 標題區塊 */}
+      <section className="text-center">
+        <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white">
+          快來關注 <span className={gradientText}>每週賽況</span>
+        </h1>
+        <p className="mt-3 max-w-2xl mx-auto text-lg text-slate-300">
+          每週五前將會結算前一週的運動打卡分數，並且更新到賽況。
+        </p>
+        <p className="mt-3 max-w-2xl mx-auto text-lg text-slate-300">最近更新：09/26</p>
+      </section>
+
+      {/* 性別切換 */}
+      <div className="flex justify-center">
+        <div className="relative inline-flex bg-slate-800 p-1 rounded-full">
+          <div
+            className={`absolute inset-[2px] w-1/2 rounded-full bg-gradient-to-r from-[#92FFFE] to-[#4CFF77] transition-transform duration-300 ease-in-out ${
+              gender === 'female' ? 'translate-x-[calc(100%-4px)]' : 'translate-x-0'
+            }`}
+          />
+          <button
+            onClick={() => setGender('male')}
+            className={`relative z-10 px-6 py-2 text-center font-bold rounded-full min-w-[96px] transition ${
+              gender === 'male' ? 'text-slate-900' : 'text-white'
+            }`}
+          >
+            男子組
+          </button>
+          <button
+            onClick={() => setGender('female')}
+            className={`relative z-10 px-6 py-2 text-center font-bold rounded-full min-w-[96px] transition ${
+              gender === 'female' ? 'text-slate-900' : 'text-white'
+            }`}
+          >
+            女子組
+          </button>
+        </div>
+      </div>
 
       {/* table 區塊 */}
       <section className="max-w-6xl mx-auto">
         <div className="bg-slate-800 shadow-lg rounded-lg overflow-hidden">
           <div className="overflow-x-auto">
             <table className="min-w-full">
-              {/* thead 保持不變 */}
               <thead className="bg-slate-700/50">
-                {/* ...你的原碼... */}
+                <tr>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-slate-300 uppercase tracking-wider">排名</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-slate-300 uppercase tracking-wider">組別 / 成員</th>
+
+                  {Array.from({ length: WEEK_COUNT }, (_, i) => i + 1).map((wk) => (
+                    <React.Fragment key={`h-w${wk}`}>
+                      <th className="px-4 py-3 text-center text-xs font-medium text-slate-300 uppercase tracking-wider">
+                        W{wk}
+                      </th>
+                      {EXTRA_COLS.filter(ec => Number(ec.afterWeek) === wk).map((ec) => (
+                        <th
+                          key={`h-extra${ec.key}`}
+                          className="px-3 py-3 text-center text-xs font-medium text-slate-300 uppercase tracking-wider"
+                        >
+                          {ec.header}
+                        </th>
+                      ))}
+                    </React.Fragment>
+                  ))}
+
+                  <th className="px-6 py-3 text-right text-xs font-medium text-slate-300 uppercase tracking-wider">
+                    <span className="align-middle">當前積分</span>
+                    <span className="relative inline-block ml-2 align-middle">
+                      <button
+                        type="button"
+                        onClick={() => setShowScoreTip(v => !v)}
+                        onBlur={() => setShowScoreTip(false)}
+                        className="align-middle flex items-center justify-center w-4 h-4 rounded-full bg-slate-700 text-slate-200 text-[10px] font-bold"
+                        aria-label="顯示積分說明"
+                        aria-expanded={showScoreTip}
+                      >
+                        i
+                      </button>
+                      {showScoreTip && (
+                        <div className="absolute right-0 mt-2 w-80 text-left whitespace-normal bg-slate-900 text-slate-100 text-xs px-3 py-2 rounded-md shadow-lg ring-1 ring-slate-700">
+                          當前積分 = (W1~W8運動打卡分數 + 🍱健康餐分數 + 🎒運動裝備分數) × 40% + (💪增肌減脂分數) × 60%
+                        </div>
+                      )}
+                    </span>
+                  </th>
+                </tr>
               </thead>
 
               <tbody className="bg-slate-800 divide-y divide-slate-700">
@@ -114,8 +185,30 @@ const RankingPage: React.FC = () => {
                   const weekLyRaw = getWeekLyRaw(team);
                   return (
                     <tr key={team.id} className={rank <= 3 ? 'bg-slate-700/30' : ''}>
-                      {/* 排名／組別保留 */}
-                      {/* ...你的原碼... */}
+                      <td className="px-6 py-4 whitespace-nowrap text-lg font-bold">
+                        {rank <= 3 && top3Count <= 5 ? getTrophyIcon(rank) : null}
+                        <span>{rank}</span>
+                      </td>
+
+                      <td className="px-6 py-4 text-white">
+                        <div className="flex items-center gap-2 min-w-0">
+                          <span
+                            className="inline-flex items-center gap-2 rounded-[8px] bg-slate-600/80 px-3 py-1 text-white max-w-full"
+                            title={`#${team.id} ${team.name}`}
+                          >
+                            <span className="text-sm font-bold whitespace-nowrap">#{team.id}</span>
+                            <span className="text-sm text-base font-semibold truncate">{team.name}</span>
+                          </span>
+                        </div>
+                        <div className="text-slate-300 text-sm mt-1">
+                          {team.members.map((m, i) => (
+                            <span key={i}>
+                              {m}
+                              {i < team.members.length - 1 && <span className="text-slate-500">&nbsp;&amp;&nbsp;</span>}
+                            </span>
+                          ))}
+                        </div>
+                      </td>
 
                       {weekLyRaw.map((raw, idx) => {
                         const wk = idx + 1;
@@ -129,7 +222,7 @@ const RankingPage: React.FC = () => {
                               return (
                                 <td
                                   key={`${team.id}_extra-${ec.key}`}
-                                  className="px-3 py-4 whitespace-nowrap text-center text-white"
+                                  className="px-3 py-4 whitespace-nowrap text-white text-center"
                                 >
                                   {ec.key === 'bonusW8' ? renderW8Bonus(rawExtra) : renderCell(rawExtra)}
                                 </td>
@@ -139,8 +232,9 @@ const RankingPage: React.FC = () => {
                         );
                       })}
 
-                      {/* 當前積分保留 */}
-                      {/* ...你的原碼... */}
+                      <td className="px-6 py-4 whitespace-nowrap text-right text-lg font-bold">
+                        <span className={gradientText}>{format1(calcTotal(team))}</span>
+                      </td>
                     </tr>
                   );
                 })}
@@ -149,8 +243,27 @@ const RankingPage: React.FC = () => {
           </div>
         </div>
 
-        {/* 下方提示與 CTA 保留 */}
-        {/* ...你的原碼... */}
+        <p className="text-center text-slate-400 mt-4 text-sm">
+          提醒：每週需完成3天運動打卡，並上傳認證照至雲端，將經過審查才會認列積分。
+        </p>
+      </section>
+
+      <section className="bg-slate-800 rounded-lg p-8">
+        <div className="flex flex-col md:flex-row items-center justify-center md:justify-between gap-6">
+          <div className="text-center md:text-left">
+            <h2 className="text-2xl font-bold text-white">看完賽事排名是不是很想趕快運動了嗎？快去運動打卡吧！</h2>
+          </div>
+          <div className="flex flex-col sm:flex-row gap-4 flex-shrink-0">
+            <a
+              href="https://drive.google.com/drive/u/0/folders/1OwkvMSo4h746QfWW-vczZGOBn-BVl89U"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block bg-gradient-to-r from-[#92FFFE] to-[#4CFF77] text-slate-900 font-bold py-2 px-4 rounded-lg"
+            >
+              上傳認證照
+            </a>
+          </div>
+        </div>
       </section>
     </div>
   );
