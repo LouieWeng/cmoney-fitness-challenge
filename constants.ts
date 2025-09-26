@@ -5,8 +5,8 @@ export const GOOGLE_DRIVE_URL = 'https://drive.google.com/drive/folders/example'
 
 export const TEAMS_DATA: Team[] = [
   // 1) 推薦：陣列 weekly / weeks / exerciseWeeks（長度 8）
-  { id: 1, name: '鍶去的脂肪庭止再生', gender: 'female', points: 0.0, members: ['陳郁庭', '許瀞鍶'], weekly: [1,2,2,2,2,2,2,2], bonusW2: 4, bonusW6: 2, bonusW8: 1.56},
-  { id: 2, name: '斯巴達增肌減脂戰士', gender: 'female', points: 0.0, members: ['謝家芸', '翁憶如'], weekly: [2,2,2,2,2,2,2,2], bonusW2: 4, bonusW6: 2, bonusW8: 2.34},
+  { id: 1, name: '鍶去的脂肪庭止再生', gender: 'female', points: 0.0, members: ['陳郁庭', '許瀞鍶'], weekly: [1,2,2,2,2,2,2,2], bonusW2: 4, bonusW6: 2, bonusW8: 2.6},
+  { id: 2, name: '斯巴達增肌減脂戰士', gender: 'female', points: 0.0, members: ['謝家芸', '翁憶如'], weekly: [2,2,2,2,2,2,2,2], bonusW2: 4, bonusW6: 2, bonusW8: 3.9},
   { id: 3, name: '聿罷不寧', gender: 'female', points: 0.0, members: ['彭聿采', '許家寧'], weekly: [2,2,2,2,2,2,2,2], bonusW2: 4, bonusW6: 2, bonusW8: 1.26},
   { id: 4, name: '吱吱唧唧嘰吱', gender: 'female', points: 0.0, members: ['劉凡瑀', '施捷如'], weekly: [1,2,2,1,2,1,2,2], bonusW2: 4, bonusW6: 2, bonusW8: 3.54},
   { id: 5, name: '我們只是胖著玩玩', gender: 'female', points: 0.0, members: ['詹壬菡', '林玉涵'], weekly: [1,1,2,1,1,2,2,1], bonusW2: 4, bonusW6: 2, bonusW8: 2.16},

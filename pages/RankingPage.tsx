@@ -60,7 +60,7 @@ const calcTotal = (t: Team): number => {
   const bonus2 = getExtraNum(t, 'bonusW2');
   const bonus6 = getExtraNum(t, 'bonusW6');
   const bonus8 = getExtraNum(t, 'bonusW8');
-  return (weeklySum + bonus2 + bonus6) * 0.4 + bonus8;
+  return (weeklySum + bonus2 + bonus6) * 0.4 + bonus8 * 0.6;
 };
 
 /** 四捨五入到小數一位 */
