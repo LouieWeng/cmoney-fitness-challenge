@@ -15,6 +15,11 @@ const getTrophyIcon = (rank: number) => {
 const gradientText =
   'bg-gradient-to-r from-[#92FFFE] to-[#4CFF77] text-transparent bg-clip-text';
 
+/** 增肌減脂專用紅橙漸層 */
+const gradientTextW8 =
+  'bg-[linear-gradient(90deg,#FF6600_0%,#FFBB00_100%)] bg-clip-text text-transparent';
+
+
 const WEEK_COUNT = 8;
 
 /** 額外欄位: 在 W2、W6、W8 後插入一欄 */
@@ -54,6 +59,7 @@ const renderW8Bonus = (v: unknown) => {
   if (Number.isNaN(n)) return <span className="text-slate-500">-</span>;
   if (n < 0) return <>{n}</>;          // 負數不加「+」
   return <>+{n}</>;                    // 正數或 0 加「+」
+  return <span className={`${gradientTextW8} font-semibold`}>{text}</span>;
 };
 
 /** 轉數字 */
