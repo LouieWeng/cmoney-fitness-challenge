@@ -158,7 +158,7 @@ const RankingPage: React.FC = () => {
       </div>
 
       {/* 排名結果海報 */}
-      <section className="relative flex justify-center z-0">
+      <section className="relative flex justify-center z-0 -mt-6 md:-mt-10">
         {/* 桌機版 */}
         <img
           src={RANKING_POSTERS[gender].desktop}
