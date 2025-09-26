@@ -131,7 +131,7 @@ const RankingPage: React.FC = () => {
       </section>
 
       {/* 性別切換 */}
-      <div className="flex justify-center">
+      <div className="flex justify-center mb-4">
         <div className="relative inline-flex bg-slate-800 p-1 rounded-full">
           <div
             className={`absolute inset-[2px] w-1/2 rounded-full bg-gradient-to-r from-[#92FFFE] to-[#4CFF77] transition-transform duration-300 ease-in-out ${
