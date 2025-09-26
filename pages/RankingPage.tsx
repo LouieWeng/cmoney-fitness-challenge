@@ -52,15 +52,23 @@ const getWeekLyRaw = (t: Team): unknown[] => {
 const renderCell = (v: unknown) =>
   isPending(v) ? <span className="text-slate-500">-</span> : <>+{Number(v) || 0}</>;
 
-/** ✅ 只有 W8Bonus 使用的顯示規則 */
+/** ✅ 只有 W8Bonus 使用的顯示規則 + 紅橙漸層 */
 const renderW8Bonus = (v: unknown) => {
   if (isPending(v)) return <span className="text-slate-500">-</span>;
   const n = Number(v);
   if (Number.isNaN(n)) return <span className="text-slate-500">-</span>;
-  if (n < 0) return <>{n}</>;          // 負數不加「+」
-  return <>+{n}</>;                    // 正數或 0 加「+」
-  return <span className={`${gradientTextW8} font-semibold`}>{text}</span>;
+
+  // 定義顯示文字
+  const text = n < 0 ? `${n}` : `+${n}`;
+
+  // 套用紅橙漸層樣式
+  return (
+    <span className="bg-[linear-gradient(90deg,#FF6600_0%,#FFBB00_100%)] bg-clip-text text-transparent font-semibold">
+      {text}
+    </span>
+  );
 };
+
 
 /** 轉數字 */
 const toNum = (v: unknown) => (isPending(v) ? 0 : Number(v) || 0);
