@@ -110,10 +110,10 @@ const RankingPage: React.FC = () => {
       {/* 標題區塊 */}
       <section className="text-center">
         <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white">
-          最終排名出爐！ <span className={gradientText}>恭喜得獎者！</span>
+          最終排名出爐 <span className={gradientText}>恭喜得獎者</span>
         </h1>
         <p className="mt-3 max-w-2xl mx-auto text-lg text-slate-300">
-          感謝各位參賽者過去8週的努力，你們養成了規律的運動習慣，變得更健康，你們超棒！！
+          所有參賽者都值得掌聲！持續8週不間斷地運動及飲控，讓自己變得更健康了，給自己一個讚！！
         </p>
         <p className="mt-3 max-w-2xl mx-auto text-lg text-slate-300">最近更新：09/26</p>
       </section>
