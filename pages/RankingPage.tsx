@@ -47,6 +47,15 @@ const getWeekLyRaw = (t: Team): unknown[] => {
 const renderCell = (v: unknown) =>
   isPending(v) ? <span className="text-slate-500">-</span> : <>+{Number(v) || 0}</>;
 
+/** ✅ 只有 W8Bonus 使用的顯示規則 */
+const renderW8Bonus = (v: unknown) => {
+  if (isPending(v)) return <span className="text-slate-500">-</span>;
+  const n = Number(v);
+  if (Number.isNaN(n)) return <span className="text-slate-500">-</span>;
+  if (n < 0) return <>{n}</>;          // 負數不加「+」
+  return <>+{n}</>;                    // 正數或 0 加「+」
+};
+
 /** 轉數字 */
 const toNum = (v: unknown) => (isPending(v) ? 0 : Number(v) || 0);
 
@@ -215,7 +224,7 @@ const RankingPage: React.FC = () => {
                                   key={`${team.id}_extra-${ec.key}`}
                                   className="px-3 py-4 whitespace-nowrap text-white text-center"
                                 >
-                                  {renderCell(rawExtra)}
+                                  {ec.key === 'bonusW8' ? renderW8Bonus(rawExtra) : renderCell(rawExtra)}
                                 </td>
                               );
                             })}
