@@ -174,7 +174,7 @@ const RankingPage: React.FC = () => {
       </section>
 
       {/* table 區塊 */}
-      <section className="max-w-6xl mx-auto relative z-10 -mt-320 transform -translate-y-20">
+      <section className="max-w-6xl mx-auto relative z-10 -mt-3200 transform -translate-y-20">
         <div className="bg-slate-800 shadow-lg rounded-lg overflow-hidden">
           <div className="overflow-x-auto">
             <table className="min-w-full">
