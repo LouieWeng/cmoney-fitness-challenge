@@ -63,7 +63,7 @@ const renderW8Bonus = (v: unknown) => {
 
   // 套用紅橙漸層樣式
   return (
-    <span className="bg-[linear-gradient(90deg,#FF6600_0%,#FFBB00_100%)] bg-clip-text text-transparent font-semibold">
+    <span className="bg-[linear-gradient(90deg,#82FFF7_0%,#82FFF7_100%)] bg-clip-text text-transparent font-semibold">
       {text}
     </span>
   );
