@@ -4,7 +4,8 @@ import { TEAMS_DATA } from '../constants';
 import { Team } from '../types';
 
 // 你的 confetti 動畫檔（把網址換成你在 Lottie 的 .lottie 連結）
-const CONFETTI_URL = 'https://lottie.host/cfe64ab9-e5dc-4596-820c-2733d4dbb243/m1oyTj6C47.lottie';
+//const CONFETTI_URL = 'https://lottie.host/cfe64ab9-e5dc-4596-820c-2733d4dbb243/m1oyTj6C47.lottie';
+const CONFETTI_URL = 'https://lottie.host/ca497309-5263-45a8-bd72-49411fed5968/VCGJ4k3XLz.lottie';
 
 import { useEffect } from 'react';
 
