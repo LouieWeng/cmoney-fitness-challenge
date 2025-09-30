@@ -3,6 +3,52 @@ import React, { useState } from 'react';
 import { TEAMS_DATA } from '../constants';
 import { Team } from '../types';
 
+// 你的 confetti 動畫檔（把網址換成你在 Lottie 的 .lottie 連結）
+const CONFETTI_URL = 'https://lottie.host/xxxxx/your-confetti.lottie';
+
+import { useEffect } from 'react';
+
+/** 進頁自動播一次 confetti（播完自動移除） */
+const ConfettiOnLoad: React.FC = () => {
+  useEffect(() => {
+    // 動態載入 dotlottie player（只載一次）
+    if (!document.querySelector('script[data-dotlottie-player]')) {
+      const s = document.createElement('script');
+      s.type = 'module';
+      s.dataset.dotlottiePlayer = '1';
+      s.src =
+        'https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs';
+      document.head.appendChild(s);
+    }
+
+    // 3 秒後把覆蓋層移除（可自行調整時間）
+    const timer = setTimeout(() => {
+      document.getElementById('confetti-overlay')?.remove();
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  // @ts-ignore: 自訂 web component
+  return (
+    <div
+      id="confetti-overlay"
+      className="pointer-events-none fixed inset-0 z-50"
+      aria-hidden="true"
+    >
+      {/* 覆蓋整個畫面，autoplay 一次即可（不用 loop） */}
+      {/* @ts-ignore */}
+      <dotlottie-player
+        src={CONFETTI_URL}
+        autoplay
+        style={{ width: '100%', height: '100%' }}
+      />
+    </div>
+  );
+};
+
+
+
 /** 排名結果海報：依性別與裝置切換 */
 const RANKING_POSTERS = {
   male: {
@@ -118,6 +164,8 @@ const RankingPage: React.FC = () => {
   const top3Count = withRanks.filter(r => r.rank <= 3).length;
 
   return (
+    <>
+    <ConfettiOnLoad />
     <div className="space-y-12">
       {/* 標題區塊 */}
       <section className="text-center">
