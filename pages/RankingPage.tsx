@@ -129,7 +129,7 @@ const RankingPage: React.FC = () => {
           也將運動與飲控融入生活，所有參賽者都值得大大的掌聲👏<br/>
           比賽結束不是終點，而是健康生活的起點！
         </p>
-        <p className="mt-3 max-w-2xl mx-auto text-lg text-slate-300">最近更新：09/26</p>
+        <p className="mt-3 max-w-2xl mx-auto text-lg text-slate-300">最近更新：09/30</p>
       </section>
 
       {/* 性別切換 */}
