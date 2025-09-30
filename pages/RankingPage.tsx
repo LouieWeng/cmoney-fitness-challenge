@@ -125,7 +125,7 @@ const RankingPage: React.FC = () => {
           最終排名出爐 <span className={gradientText}>恭喜得獎隊伍！</span>
         </h1>
         <p className="mt-3 max-w-2xl mx-auto text-lg text-slate-300">
-          感謝大家連續 8 週的堅持與努力，不只是挑戰自我，也將運動與飲控融入生活，所有參賽者都值得大大的掌聲！<br>比賽結束不是終點，而是健康生活的起點！
+          感謝大家連續 8 週的堅持與努力，不只是挑戰自我，也將運動與飲控融入生活，所有參賽者都值得大大的掌聲！<br/>比賽結束不是終點，而是健康生活的起點！
         </p>
         <p className="mt-3 max-w-2xl mx-auto text-lg text-slate-300">最近更新：09/26</p>
       </section>
