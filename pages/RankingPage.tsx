@@ -200,7 +200,7 @@ const RankingPage: React.FC = () => {
                   ))}
 
                   <th className="px-6 py-3 text-right text-xs font-medium text-slate-300 uppercase tracking-wider">
-                    <span className="align-middle">當前積分</span>
+                    <span className="align-middle">總積分</span>
                     <span className="relative inline-block ml-2 align-middle">
                       <button
                         type="button"
@@ -214,7 +214,7 @@ const RankingPage: React.FC = () => {
                       </button>
                       {showScoreTip && (
                         <div className="absolute right-0 mt-2 w-80 text-left whitespace-normal bg-slate-900 text-slate-100 text-xs px-3 py-2 rounded-md shadow-lg ring-1 ring-slate-700">
-                          當前積分 = (W1~W8運動打卡分數 + 🍱健康餐分數 + 🎒運動裝備分數) × 40% + (💪增肌減脂分數) × 60%
+                          總積分（四捨五入到小數一位） = (W1~W8運動打卡分數 + 🍱健康餐分數 + 🎒運動裝備分數) × 40% + (💪增肌減脂分數) × 60%
                         </div>
                       )}
                     </span>
