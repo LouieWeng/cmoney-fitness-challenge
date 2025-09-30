@@ -11,7 +11,7 @@ export const TEAMS_DATA: Team[] = [
   { id: 4, name: '吱吱唧唧嘰吱', gender: 'female', points: 0.0, members: ['劉凡瑀', '施捷如'], weekly: [1,2,2,1,2,1,2,2], bonusW2: 4, bonusW6: 2, bonusW8: 5.90},
   { id: 5, name: '我們只是胖著玩玩', gender: 'female', points: 0.0, members: ['詹壬菡', '林玉涵'], weekly: [1,1,2,1,1,2,2,1], bonusW2: 4, bonusW6: 2, bonusW8: 3.60},
   { id: 6, name: '瘦到你認不出我隊', gender: 'female', points: 0.0, members: ['林雅茹', '張翊琳'], weekly: [2,2,2,2,2,2,2,2], bonusW2: 4, bonusW6: 2, bonusW8: 13.50},
-  { id: 7, name: '我胖我驕傲', gender: 'female', points: 0.0, members: ['杜巧琍', '蔡佳玲'], weekly: [2,2,2,2,2,2,2,2], bonusW2: 4, bonusW6: 2, bonusW8: 22.10},
+  { id: 7, name: '我胖我驕傲', gender: 'female', points: 0.0, members: ['杜巧琍', '蔡佳玲'], weekly: [2,2,2,2,2,2,2,2], bonusW2: 4, bonusW6: 2, bonusW8: -10.60},
   { id: 8, name: '總是志在參加', gender: 'female', points: 0.0, members: ['陳玥年', '黃孟淳'], weekly: [2,2,2,2,2,2,2,2], bonusW2: 4, bonusW6: 2, bonusW8: 10.60},
   { id: 9, name: '祐要運動到嫣嫣一息ㄌ', gender: 'female', points: 0.0, members: ['蘇祐萱', '李嫣容'], weekly: [2,2,2,2,2,2,2,2], bonusW2: 4, bonusW6: 2, bonusW8: 4.40},
   { id: 10, name: 'GK動態提脂', gender: 'female', points: 0.0, members: ['林怡汝', '游季婕'], weekly: [2,2,2,2,2,2,2,2], bonusW2: 4, bonusW6: 2, bonusW8: 10.50},
